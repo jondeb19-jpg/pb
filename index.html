@@ -3,8 +3,24 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <title>Paintbrush - Sans titre</title>
+  <title>Atelier Collectif — Fresque Partagée en Direct</title>
   <style>
+    :root {
+      --bg-desk: #f3efe6;
+      --bg-desk-dot: #dfd8c8;
+      --surface: #fffdf9;
+      --surface-muted: #f7f3ea;
+      --ink: #1e1d1a;
+      --ink-soft: #6b665c;
+      --accent: #d95d39;
+      --accent-hover: #bf4b29;
+      --border: #e2dacb;
+      --shadow-sm: 0 2px 8px rgba(30, 29, 26, 0.06);
+      --shadow-md: 0 10px 30px rgba(30, 29, 26, 0.10);
+      --radius-md: 12px;
+      --radius-lg: 18px;
+    }
+
     * {
       box-sizing: border-box;
       user-select: none;
@@ -13,212 +29,349 @@
 
     body {
       margin: 0;
-      padding: 8px;
-      background-color: #008080;
-      font-family: "MS Sans Serif", "Microsoft Sans Serif", Tahoma, Arial, sans-serif;
-      font-size: 12px;
-      color: #000;
-      height: 100vh;
+      min-height: 100vh;
+      background-color: var(--bg-desk);
+      background-image: radial-gradient(var(--bg-desk-dot) 1.2px, transparent 1.2px);
+      background-size: 20px 20px;
+      color: var(--ink);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
       display: flex;
       flex-direction: column;
-      overflow: hidden;
+      align-items: center;
+      padding: 14px;
     }
 
-    /* Bordures 3D Windows 3.1 / 95 */
-    .win-outset {
-      background-color: #c0c0c0;
-      border-top: 2px solid #ffffff;
-      border-left: 2px solid #ffffff;
-      border-right: 2px solid #404040;
-      border-bottom: 2px solid #404040;
-      box-shadow: inset -1px -1px 0 #808080, inset 1px 1px 0 #dfdfdf;
-    }
-
-    .win-inset {
-      border-top: 2px solid #808080;
-      border-left: 2px solid #808080;
-      border-right: 2px solid #ffffff;
-      border-bottom: 2px solid #ffffff;
-      box-shadow: inset 1px 1px 0 #404040, inset -1px -1px 0 #dfdfdf;
-    }
-
-    .win-window {
-      display: flex;
-      flex-direction: column;
-      height: 100%;
+    /* En-tête éditorial */
+    .header {
       width: 100%;
       max-width: 1120px;
-      margin: 0 auto;
-    }
-
-    /* Barre de titre */
-    .title-bar {
-      background: linear-gradient(90deg, #000080, #1084d0);
-      color: #ffffff;
-      font-weight: bold;
-      padding: 3px 6px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      letter-spacing: 0.3px;
-    }
-
-    .title-bar-left {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .title-controls {
-      display: flex;
-      gap: 2px;
-    }
-
-    .title-btn {
-      width: 16px;
-      height: 14px;
-      background: #c0c0c0;
-      color: #000;
-      font-size: 10px;
-      line-height: 10px;
-      text-align: center;
-      border-top: 1px solid #fff;
-      border-left: 1px solid #fff;
-      border-right: 1px solid #404040;
-      border-bottom: 1px solid #404040;
-      font-weight: bold;
-    }
-
-    /* Barre de menus */
-    .menu-bar {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-sm);
+      padding: 12px 18px;
       display: flex;
       flex-wrap: wrap;
-      gap: 4px;
-      padding: 2px 4px;
-      background: #c0c0c0;
-      border-bottom: 1px solid #808080;
-    }
-
-    .menu-btn {
-      background: #c0c0c0;
-      border: 1px solid transparent;
-      padding: 2px 7px;
-      font-family: inherit;
-      font-size: 12px;
-      cursor: pointer;
-    }
-
-    .menu-btn:hover {
-      border-top: 1px solid #fff;
-      border-left: 1px solid #fff;
-      border-right: 1px solid #808080;
-      border-bottom: 1px solid #808080;
-    }
-
-    .menu-btn:active {
-      border-top: 1px solid #808080;
-      border-left: 1px solid #808080;
-      border-right: 1px solid #fff;
-      border-bottom: 1px solid #fff;
-    }
-
-    /* Zone de travail principale */
-    .workspace {
-      display: flex;
-      flex: 1;
-      padding: 4px;
-      gap: 6px;
-      overflow: hidden;
-    }
-
-    /* Boîte à outils gauche */
-    .toolbox {
-      width: 62px;
-      display: flex;
-      flex-direction: column;
       align-items: center;
-      gap: 6px;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .brand-badge {
+      width: 40px;
+      height: 40px;
+      border-radius: 12px;
+      background: var(--accent);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      box-shadow: 0 4px 12px rgba(217, 93, 57, 0.28);
       flex-shrink: 0;
     }
 
-    .tools-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 26px);
-      gap: 2px;
+    .brand-text h1 {
+      margin: 0;
+      font-size: 17px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    .brand-text p {
+      margin: 2px 0 0;
+      font-size: 12.5px;
+      color: var(--ink-soft);
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    /* Onglets Atelier / Archives */
+    .tabs {
+      display: inline-flex;
+      background: var(--surface-muted);
+      padding: 4px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+    }
+
+    .tab-btn {
+      border: none;
+      background: transparent;
+      color: var(--ink-soft);
+      font-size: 13px;
+      font-weight: 600;
+      padding: 6px 14px;
+      border-radius: 999px;
+      cursor: pointer;
+      transition: all 0.18s ease;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .tab-btn.active {
+      background: var(--surface);
+      color: var(--ink);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .archive-badge {
+      background: var(--border);
+      color: var(--ink);
+      font-size: 11px;
+      padding: 1px 6px;
+      border-radius: 999px;
+    }
+
+    .live-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      color: var(--ink-soft);
+      background: var(--surface-muted);
+      border: 1px solid var(--border);
+      padding: 6px 12px;
+      border-radius: 999px;
+    }
+
+    .live-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #9e988c;
+    }
+    .live-dot.online {
+      background: #2b9348;
+      box-shadow: 0 0 0 3px rgba(43, 147, 72, 0.18);
+    }
+    .live-dot.saving {
+      background: #e09f3e;
+    }
+    .live-dot.error {
+      background: #d62828;
+    }
+
+    /* Conteneur principal */
+    .main-stage {
+      width: 100%;
+      max-width: 1120px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      flex: 1;
+    }
+
+    /* Barre d'outils flottante */
+    .toolbar {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-sm);
+      padding: 8px 12px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .tool-group {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      flex-wrap: wrap;
+    }
+
+    .divider {
+      width: 1px;
+      height: 24px;
+      background: var(--border);
+      margin: 0 4px;
     }
 
     .tool-btn {
-      width: 26px;
-      height: 26px;
-      background: #c0c0c0;
-      border-top: 2px solid #ffffff;
-      border-left: 2px solid #ffffff;
-      border-right: 2px solid #404040;
-      border-bottom: 2px solid #404040;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      padding: 0;
+      border: 1px solid transparent;
+      background: transparent;
+      color: var(--ink);
+      border-radius: 9px;
+      padding: 6px 10px;
       font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      transition: all 0.15s ease;
+    }
+
+    .tool-btn:hover {
+      background: var(--surface-muted);
     }
 
     .tool-btn.active {
-      background: #e0e0e0;
-      border-top: 2px solid #404040;
-      border-left: 2px solid #404040;
-      border-right: 2px solid #ffffff;
-      border-bottom: 2px solid #ffffff;
+      background: var(--ink);
+      color: #fff;
     }
 
-    .size-box {
-      width: 54px;
-      padding: 4px 2px;
-      display: flex;
-      flex-direction: column;
+    .btn-primary {
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      border-radius: 9px;
+      padding: 7px 13px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
       align-items: center;
-      gap: 4px;
-      background: #c0c0c0;
+      gap: 6px;
+      transition: background 0.15s ease;
     }
 
-    .size-option {
-      width: 44px;
-      height: 14px;
+    .btn-primary:hover {
+      background: var(--accent-hover);
+    }
+
+    .btn-secondary {
+      background: var(--surface-muted);
+      color: var(--ink);
+      border: 1px solid var(--border);
+      border-radius: 9px;
+      padding: 6px 11px;
+      font-size: 12.5px;
+      font-weight: 500;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .btn-secondary:hover {
+      background: #ece5d5;
+    }
+
+    /* Épaisseurs */
+    .size-pill {
+      width: 28px;
+      height: 28px;
+      border-radius: 8px;
+      border: 1px solid transparent;
+      background: transparent;
       display: flex;
       align-items: center;
       justify-content: center;
       cursor: pointer;
     }
 
-    .size-option.active {
-      background: #000080;
+    .size-pill:hover {
+      background: var(--surface-muted);
     }
 
-    .size-option.active .size-line {
-      background: #ffffff;
+    .size-pill.active {
+      border-color: var(--ink);
+      background: var(--surface-muted);
     }
 
-    .size-line {
-      width: 34px;
-      background: #000000;
+    .size-dot {
+      border-radius: 50%;
+      background: var(--ink);
     }
 
-    /* Zone du Canvas */
-    .canvas-container {
-      flex: 1;
-      background: #808080;
-      overflow: auto;
-      padding: 6px;
-      position: relative;
+    /* Espace Toile + Palette */
+    .studio-layout {
       display: flex;
+      gap: 14px;
       align-items: flex-start;
-      justify-content: flex-start;
+      justify-content: center;
     }
 
-    .canvas-wrapper {
+    .palette-rail {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-sm);
+      padding: 10px 8px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      flex-shrink: 0;
+    }
+
+    .color-swatch {
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      border: 2px solid rgba(0, 0, 0, 0.12);
+      cursor: pointer;
+      transition: transform 0.12s ease, box-shadow 0.12s ease;
+    }
+
+    .color-swatch:hover {
+      transform: scale(1.12);
+    }
+
+    .color-swatch.active {
+      transform: scale(1.15);
+      box-shadow: 0 0 0 2px var(--surface), 0 0 0 4px var(--ink);
+    }
+
+    .color-picker-wrap {
       position: relative;
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 2px dashed var(--ink-soft);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      cursor: pointer;
+    }
+
+    .color-picker-wrap input[type="color"] {
+      position: absolute;
+      inset: -6px;
+      width: 40px;
+      height: 40px;
+      opacity: 0;
+      cursor: pointer;
+    }
+
+    .canvas-board {
+      flex: 1;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-md);
+      padding: 12px;
+      overflow: auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .canvas-frame {
+      position: relative;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.08);
       background: #ffffff;
-      box-shadow: 2px 2px 0 #404040;
       line-height: 0;
     }
 
@@ -235,185 +388,287 @@
       pointer-events: none;
     }
 
-    /* Palette de couleurs en bas */
-    .palette-bar {
+    .canvas-hint {
+      margin-top: 8px;
+      font-size: 12px;
+      color: var(--ink-soft);
+      text-align: center;
+    }
+
+    /* Vue Archives */
+    .archives-view {
+      display: none;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-sm);
+      padding: 20px;
+    }
+
+    .archives-view.visible {
+      display: block;
+    }
+
+    .archives-header {
+      margin-bottom: 18px;
+    }
+
+    .archives-header h2 {
+      margin: 0 0 4px;
+      font-size: 18px;
+    }
+
+    .archives-header p {
+      margin: 0;
+      font-size: 13px;
+      color: var(--ink-soft);
+    }
+
+    .archives-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 16px;
+    }
+
+    .archive-card {
+      background: var(--surface-muted);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.15s ease;
+    }
+
+    .archive-card:hover {
+      transform: translateY(-2px);
+    }
+
+    .archive-thumb {
+      width: 100%;
+      aspect-ratio: 16 / 10;
+      object-fit: contain;
+      background: #ffffff;
+      border-bottom: 1px solid var(--border);
+      cursor: zoom-in;
+    }
+
+    .archive-meta {
+      padding: 10px 12px;
       display: flex;
       align-items: center;
+      justify-content: space-between;
       gap: 8px;
-      padding: 5px 6px;
-      background: #c0c0c0;
-      border-top: 1px solid #ffffff;
+      font-size: 12px;
+      color: var(--ink-soft);
     }
 
-    .active-colors {
-      width: 32px;
-      height: 32px;
-      position: relative;
-      background: #dfdfdf;
-      flex-shrink: 0;
+    .archive-title {
+      font-weight: 600;
+      color: var(--ink);
+      display: block;
+      margin-bottom: 2px;
     }
 
-    .bg-swatch {
-      width: 16px;
-      height: 16px;
-      position: absolute;
-      bottom: 3px;
-      right: 3px;
-      border: 1px solid #808080;
-      background: #ffffff;
+    /* Modale d'aperçu plein écran pour les archives */
+    .modal-backdrop {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(20, 19, 17, 0.75);
+      z-index: 100;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
     }
 
-    .fg-swatch {
-      width: 16px;
-      height: 16px;
-      position: absolute;
-      top: 3px;
-      left: 3px;
-      border: 1px solid #808080;
-      background: #000000;
+    .modal-backdrop.open {
+      display: flex;
     }
 
-    .swatches-grid {
-      display: grid;
-      grid-template-columns: repeat(14, 16px);
-      grid-template-rows: repeat(2, 16px);
-      gap: 2px;
+    .modal-box {
+      background: var(--surface);
+      border-radius: var(--radius-lg);
+      padding: 16px;
+      max-width: 920px;
+      width: 100%;
+      box-shadow: var(--shadow-md);
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
     }
 
-    .swatch {
-      width: 16px;
-      height: 16px;
-      cursor: pointer;
-      border-top: 1px solid #404040;
-      border-left: 1px solid #404040;
-      border-right: 1px solid #ffffff;
-      border-bottom: 1px solid #ffffff;
+    .modal-box img {
+      width: 100%;
+      max-height: 75vh;
+      object-fit: contain;
+      background: #fff;
+      border-radius: 8px;
+      border: 1px solid var(--border);
     }
 
-    /* Barre d'état */
-    .status-bar {
+    .modal-footer {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 2px 4px;
-      gap: 6px;
-      background: #c0c0c0;
-      border-top: 1px solid #808080;
+      font-size: 13px;
+      color: var(--ink-soft);
+    }
+
+    /* Pied de page discret avec compteurs */
+    .footer-subtle {
+      width: 100%;
+      max-width: 1120px;
+      margin-top: 14px;
+      padding: 4px 8px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
       font-size: 11px;
+      color: #968f82;
+      opacity: 0.78;
     }
 
-    .status-panel {
-      padding: 2px 6px;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
+    .subtle-stats {
+      display: flex;
+      gap: 12px;
     }
 
-    .sync-dot {
-      display: inline-block;
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: #808080;
-      margin-right: 4px;
-    }
-
-    .sync-dot.online { background: #00a000; }
-    .sync-dot.saving { background: #d08000; }
-    .sync-dot.error  { background: #d00000; }
-
-    @media (max-width: 640px) {
-      body { padding: 2px; }
-      .swatches-grid {
-        grid-template-columns: repeat(7, 18px);
-        grid-template-rows: repeat(4, 18px);
+    @media (max-width: 768px) {
+      body { padding: 8px; }
+      .studio-layout { flex-direction: column; align-items: stretch; }
+      .palette-rail {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
       }
-      .swatch { width: 18px; height: 18px; }
+      .divider { display: none; }
     }
   </style>
 </head>
 <body>
-  <div class="win-window win-outset">
-    <!-- Barre de titre -->
-    <div class="title-bar">
-      <div class="title-bar-left">
-        <span>🎨</span>
-        <span>Paintbrush - Toile Partagée en Direct</span>
-      </div>
-      <div class="title-controls">
-        <div class="title-btn">_</div>
-        <div class="title-btn">□</div>
-        <div class="title-btn">×</div>
+
+  <!-- En-tête -->
+  <header class="header">
+    <div class="brand">
+      <div class="brand-badge">🖌️</div>
+      <div class="brand-text">
+        <h1>Fresque Collective</h1>
+        <p>Dessinez librement : chaque trait est enregistré et partagé avec tous les visiteurs.</p>
       </div>
     </div>
 
-    <!-- Barre d'actions rapides -->
-    <div class="menu-bar">
-      <button class="menu-btn" id="btnUndo" title="Annuler mon dernier trait (Ctrl+Z)">↩ Annuler</button>
-      <button class="menu-btn" id="btnClear" title="Effacer toute la toile partagée">📄 Nouveau (Tout effacer)</button>
-      <button class="menu-btn" id="btnDownload" title="Enregistrer l'image sur votre appareil">💾 Enregistrer PNG</button>
-      <button class="menu-btn" id="btnSyncNow" title="Forcer l'envoi vers le serveur">🔄 Synchroniser</button>
+    <div class="header-actions">
+      <div class="tabs">
+        <button class="tab-btn active" id="tabStudio">🎨 Toile en cours</button>
+        <button class="tab-btn" id="tabArchives">
+          🏛️ Archives <span class="archive-badge" id="archiveCount">0</span>
+        </button>
+      </div>
+
+      <div class="live-pill" title="État de synchronisation avec la toile partagée">
+        <span class="live-dot" id="syncDot"></span>
+        <span id="syncText">Connexion...</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Vue Atelier -->
+  <main class="main-stage" id="studioView">
+    <div class="toolbar">
+      <div class="tool-group">
+        <button class="tool-btn active" data-tool="brush" title="Pinceau fluide">🖌️ Pinceau</button>
+        <button class="tool-btn" data-tool="pencil" title="Crayon fin">✏️ Crayon</button>
+        <button class="tool-btn" data-tool="spray" title="Aérosol">💨 Spray</button>
+        <button class="tool-btn" data-tool="fill" title="Remplir une zone">🪣 Remplir</button>
+        <button class="tool-btn" data-tool="line" title="Ligne droite">╱ Ligne</button>
+        <button class="tool-btn" data-tool="rect" title="Rectangle">▭ Carré</button>
+        <button class="tool-btn" data-tool="ellipse" title="Cercle / Ellipse">◯ Cercle</button>
+        <button class="tool-btn" data-tool="text" title="Ajouter du texte">T Texte</button>
+        <button class="tool-btn" data-tool="eraser" title="Gomme blanche">🧽 Gomme</button>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="tool-group" title="Épaisseur du trait">
+        <button class="size-pill active" data-size="3"><span class="size-dot" style="width:4px;height:4px"></span></button>
+        <button class="size-pill" data-size="7"><span class="size-dot" style="width:8px;height:8px"></span></button>
+        <button class="size-pill" data-size="14"><span class="size-dot" style="width:13px;height:13px"></span></button>
+        <button class="size-pill" data-size="24"><span class="size-dot" style="width:18px;height:18px"></span></button>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="tool-group">
+        <button class="btn-secondary" id="btnUndo" title="Annuler mon dernier trait (Ctrl+Z)">↩ Annuler</button>
+        <button class="btn-secondary" id="btnDownload" title="Télécharger cette œuvre en PNG">⬇ PNG</button>
+        <button class="btn-primary" id="btnNewCanvas" title="Archive la toile actuelle dans la galerie et démarre une toile vierge">
+          ✨ Nouvelle toile
+        </button>
+      </div>
     </div>
 
-    <!-- Zone centrale -->
-    <div class="workspace">
-      <div class="toolbox">
-        <div class="tools-grid" id="toolsGrid">
-          <button class="tool-btn active" data-tool="pencil" title="Crayon">✏️</button>
-          <button class="tool-btn" data-tool="brush" title="Pinceau">🖌️</button>
-          <button class="tool-btn" data-tool="spray" title="Aérosol">💨</button>
-          <button class="tool-btn" data-tool="fill" title="Pot de peinture (Remplissage)">🪣</button>
-          <button class="tool-btn" data-tool="eraser" title="Gomme (Clic droit = couleur secondaire)">🧽</button>
-          <button class="tool-btn" data-tool="picker" title="Pipette">💉</button>
-          <button class="tool-btn" data-tool="line" title="Ligne droite">╱</button>
-          <button class="tool-btn" data-tool="rect" title="Rectangle">▭</button>
-          <button class="tool-btn" data-tool="ellipse" title="Ellipse / Cercle">◯</button>
-          <button class="tool-btn" data-tool="text" title="Texte">A</button>
+    <div class="studio-layout">
+      <!-- Palette de couleurs -->
+      <aside class="palette-rail" id="paletteRail" title="Choisir une couleur">
+        <label class="color-picker-wrap" title="Couleur personnalisée">
+          +
+          <input type="color" id="customColorInput" value="#d95d39" />
+        </label>
+      </aside>
+
+      <!-- Toile centrale -->
+      <section class="canvas-board">
+        <div class="canvas-frame">
+          <canvas id="mainCanvas" width="820" height="520"></canvas>
+          <canvas id="previewCanvas" width="820" height="520"></canvas>
         </div>
-
-        <div class="size-box win-inset" id="sizeBox" title="Épaisseur du trait">
-          <div class="size-option active" data-size="2"><div class="size-line" style="height:2px"></div></div>
-          <div class="size-option" data-size="5"><div class="size-line" style="height:5px"></div></div>
-          <div class="size-option" data-size="10"><div class="size-line" style="height:9px"></div></div>
-          <div class="size-option" data-size="18"><div class="size-line" style="height:12px"></div></div>
+        <div class="canvas-hint" id="statusHint">
+          Astuce : créez une « Nouvelle toile » pour archiver ce dessin collectif dans les Archives et repartir d'une page blanche.
         </div>
-      </div>
+      </section>
+    </div>
+  </main>
 
-      <div class="canvas-container win-inset">
-        <div class="canvas-wrapper">
-          <canvas id="mainCanvas" width="800" height="520"></canvas>
-          <canvas id="previewCanvas" width="800" height="520"></canvas>
+  <!-- Vue Archives (lecture seule, aucune suppression possible) -->
+  <section class="main-stage archives-view" id="archivesView">
+    <div class="archives-header">
+      <h2>🏛️ Archives des fresques collectives</h2>
+      <p>Toutes les toiles terminées sont conservées ici de façon permanente. Cliquez sur une œuvre pour l'agrandir.</p>
+    </div>
+    <div class="archives-grid" id="archivesGrid">
+      <p style="color: var(--ink-soft); font-size: 13px;">Chargement des archives...</p>
+    </div>
+  </section>
+
+  <!-- Modale Aperçu Archive -->
+  <div class="modal-backdrop" id="archiveModal">
+    <div class="modal-box">
+      <img id="modalImg" src="" alt="Archive fresque collective" />
+      <div class="modal-footer">
+        <span id="modalCaption"></span>
+        <div style="display:flex; gap:8px;">
+          <a id="modalDownload" class="btn-secondary" download="archive-fresque.png" style="text-decoration:none;">⬇ Télécharger</a>
+          <button class="btn-primary" id="modalClose">Fermer</button>
         </div>
-      </div>
-    </div>
-
-    <!-- Palette de couleurs -->
-    <div class="palette-bar">
-      <div class="active-colors win-inset" title="Clic gauche : couleur principale | Clic droit : arrière-plan">
-        <div class="bg-swatch" id="bgSwatch"></div>
-        <div class="fg-swatch" id="fgSwatch"></div>
-      </div>
-      <div class="swatches-grid" id="swatchesGrid"></div>
-    </div>
-
-    <!-- Barre d'état -->
-    <div class="status-bar">
-      <div class="status-panel win-inset" style="flex:1" id="statusText">
-        Prêt. Clic gauche = couleur 1, Clic droit = couleur 2.
-      </div>
-      <div class="status-panel win-inset" style="width:105px" id="coordsText">0, 0 px</div>
-      <div class="status-panel win-inset" style="width:190px">
-        <span class="sync-dot" id="syncDot"></span>
-        <span id="syncText">Connexion Firebase...</span>
       </div>
     </div>
   </div>
 
+  <!-- Pied de page discret avec compteurs -->
+  <footer class="footer-subtle">
+    <span>Toile partagée en temps réel</span>
+    <div class="subtle-stats">
+      <span id="visitsCounter">Visites : —</span>
+      <span>•</span>
+      <span id="participantsCounter">Participants : —</span>
+    </div>
+  </footer>
+
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";
-    import { getDatabase, ref, set, onValue } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-database.js";
+    import { getDatabase, ref, set, push, onValue, runTransaction } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-database.js";
 
-    // Votre configuration Firebase
     const firebaseConfig = {
       apiKey: "AIzaSyDIaO-l7a9hh7gFFs66VxtKq3jBs2gDr8c",
       authDomain: "paintbrush-15152.firebaseapp.com",
@@ -426,17 +681,40 @@
 
     const app = initializeApp(firebaseConfig);
     const db = getDatabase(app);
-    const canvasRef = ref(db, "shared_canvas/current");
 
-    // Identifiant unique de cet onglet pour éviter de réécraser son propre dessin en cours
-    const clientId = "user_" + Math.random().toString(36).slice(2, 10);
+    const currentCanvasRef = ref(db, "shared_canvas/current");
+    const archivesRef = ref(db, "shared_canvas/archives");
+    const visitsRef = ref(db, "shared_canvas/stats/visits");
+    const participantsRef = ref(db, "shared_canvas/stats/participants");
 
-    // Palette 28 couleurs classique Windows 3.1 / 95
-    const PALETTE = [
-      "#000000", "#808080", "#800000", "#808000", "#008000", "#008080", "#000080",
-      "#800080", "#808040", "#004040", "#0080ff", "#004080", "#4000ff", "#804000",
-      "#ffffff", "#c0c0c0", "#ff0000", "#ffff00", "#00ff00", "#00ffff", "#0000ff",
-      "#ff00ff", "#ffff80", "#00ff80", "#80ffff", "#8080ff", "#ff0080", "#ff8040"
+    const clientId = "artist_" + Math.random().toString(36).slice(2, 10);
+
+    // Compteur de visites (1 incrément par ouverture de session)
+    if (!sessionStorage.getItem("fresque_visited")) {
+      sessionStorage.setItem("fresque_visited", "1");
+      runTransaction(visitsRef, (current) => (current || 0) + 1).catch(() => {});
+    }
+
+    // Compteur de participants (incrémenté dès que le visiteur trace son premier coup de pinceau)
+    function registerParticipantOnce() {
+      if (localStorage.getItem("fresque_participated")) return;
+      localStorage.setItem("fresque_participated", "1");
+      runTransaction(participantsRef, (current) => (current || 0) + 1).catch(() => {});
+    }
+
+    onValue(visitsRef, (snap) => {
+      document.getElementById("visitsCounter").textContent = `Visites : ${snap.val() ?? 1}`;
+    });
+
+    onValue(participantsRef, (snap) => {
+      document.getElementById("participantsCounter").textContent = `Participants : ${snap.val() ?? 0}`;
+    });
+
+    // Palette harmonieuse (couleurs artistiques + essentiels)
+    const COLORS = [
+      "#1e1d1a", "#6b665c", "#ffffff", "#d95d39", "#e63946",
+      "#f4a261", "#e9c46a", "#2a9d8f", "#2b9348", "#3a86ff",
+      "#1d3557", "#8338ec", "#ff006e", "#8d5b4c"
     ];
 
     const mainCanvas = document.getElementById("mainCanvas");
@@ -444,34 +722,27 @@
     const previewCanvas = document.getElementById("previewCanvas");
     const pCtx = previewCanvas.getContext("2d");
 
-    const fgSwatch = document.getElementById("fgSwatch");
-    const bgSwatch = document.getElementById("bgSwatch");
-    const coordsText = document.getElementById("coordsText");
-    const statusText = document.getElementById("statusText");
     const syncDot = document.getElementById("syncDot");
     const syncText = document.getElementById("syncText");
+    const statusHint = document.getElementById("statusHint");
 
-    let currentTool = "pencil";
-    let brushSize = 2;
-    let fgColor = "#000000";
-    let bgColor = "#ffffff";
+    let currentTool = "brush";
+    let brushSize = 3;
+    let currentColor = "#1e1d1a";
     let isDrawing = false;
-    let activeColor = "#000000";
-    let startX = 0;
-    let startY = 0;
-    let lastX = 0;
-    let lastY = 0;
+    let startX = 0, startY = 0, lastX = 0, lastY = 0;
     let undoStack = [];
-    let lastReceivedTimestamp = 0;
+    let lastSentTimestamp = 0;
     let saveTimeout = null;
+    let currentStrokeCount = 0;
 
-    // Initialisation toile blanche
+    // Fond blanc initial
     ctx.fillStyle = "#ffffff";
     ctx.fillRect(0, 0, mainCanvas.width, mainCanvas.height);
 
-    function setSyncState(state, label) {
-      syncDot.className = "sync-dot " + state;
-      syncText.textContent = label;
+    function setSyncState(state, text) {
+      syncDot.className = "live-dot " + state;
+      syncText.textContent = text;
     }
 
     function pushUndo() {
@@ -479,142 +750,233 @@
       undoStack.push(ctx.getImageData(0, 0, mainCanvas.width, mainCanvas.height));
     }
 
-    // Sauvegarde vers Firebase Realtime Database
-    function scheduleSaveToFirebase(immediate = false) {
+    function scheduleSave(immediate = false) {
       clearTimeout(saveTimeout);
-      const delay = immediate ? 50 : 400;
-      setSyncState("saving", "Envoi du dessin...");
+      setSyncState("saving", "Sauvegarde...");
       saveTimeout = setTimeout(async () => {
         try {
           const dataUrl = mainCanvas.toDataURL("image/webp", 0.85);
           const now = Date.now();
-          lastReceivedTimestamp = now;
-          await set(canvasRef, {
+          lastSentTimestamp = now;
+          await set(currentCanvasRef, {
             image: dataUrl,
             updatedBy: clientId,
-            updatedAt: now
+            updatedAt: now,
+            strokes: currentStrokeCount
           });
-          setSyncState("online", "Synchronisé en direct");
+          setSyncState("online", "En direct");
         } catch (err) {
           console.error(err);
-          setSyncState("error", "Erreur règles Firebase");
-          statusText.textContent = "Erreur Firebase : vérifiez que .read et .write sont à true.";
+          setSyncState("error", "Erreur réseau");
         }
-      }, delay);
+      }, immediate ? 40 : 350);
     }
 
-    // Écoute des modifications des autres visiteurs en temps réel
-    onValue(canvasRef, (snapshot) => {
+    // Écoute de la toile partagée en direct
+    onValue(currentCanvasRef, (snapshot) => {
       const data = snapshot.val();
-      setSyncState("online", "Connecté en direct");
+      setSyncState("online", "En direct");
       if (!data || !data.image) return;
-      if (data.updatedBy === clientId && data.updatedAt === lastReceivedTimestamp) return;
+      currentStrokeCount = data.strokes || 0;
+      if (data.updatedBy === clientId && data.updatedAt === lastSentTimestamp) return;
       if (isDrawing) return;
 
       const img = new Image();
       img.onload = () => {
         ctx.clearRect(0, 0, mainCanvas.width, mainCanvas.height);
         ctx.drawImage(img, 0, 0);
-        statusText.textContent = "Toile mise à jour par un visiteur.";
       };
       img.src = data.image;
-    }, (error) => {
-      console.error(error);
-      setSyncState("error", "Accès refusé");
+    }, () => {
+      setSyncState("error", "Accès bloqué");
     });
 
-    // Construction de la palette
-    const swatchesGrid = document.getElementById("swatchesGrid");
-    PALETTE.forEach((hex) => {
-      const div = document.createElement("div");
-      div.className = "swatch";
-      div.style.backgroundColor = hex;
-      div.addEventListener("mousedown", (e) => {
-        e.preventDefault();
-        if (e.button === 2) {
-          bgColor = hex;
-          bgSwatch.style.backgroundColor = hex;
-        } else {
-          fgColor = hex;
-          fgSwatch.style.backgroundColor = hex;
-        }
+    // Chargement et affichage des Archives (lecture seule)
+    const archivesGrid = document.getElementById("archivesGrid");
+    const archiveCount = document.getElementById("archiveCount");
+
+    onValue(archivesRef, (snapshot) => {
+      const val = snapshot.val();
+      if (!val) {
+        archiveCount.textContent = "0";
+        archivesGrid.innerHTML = `<p style="color: var(--ink-soft); font-size: 13px;">Aucune œuvre archivée pour le moment. Cliquez sur « ✨ Nouvelle toile » dans l'atelier pour archiver le dessin actuel !</p>`;
+        return;
+      }
+
+      const items = Object.entries(val)
+        .map(([id, item]) => ({ id, ...item }))
+        .sort((a, b) => (b.archivedAt || 0) - (a.archivedAt || 0));
+
+      archiveCount.textContent = items.length;
+      archivesGrid.innerHTML = "";
+
+      items.forEach((item, index) => {
+        const number = items.length - index;
+        const dateStr = item.archivedAt
+          ? new Date(item.archivedAt).toLocaleDateString("fr-FR", {
+              day: "2-digit", month: "short", year: "numeric", hour: "2-digit", minute: "2-digit"
+            })
+          : "Date inconnue";
+
+        const card = document.createElement("article");
+        card.className = "archive-card";
+
+        const img = document.createElement("img");
+        img.className = "archive-thumb";
+        img.src = item.image;
+        img.alt = `Fresque #${number}`;
+        img.addEventListener("click", () => openModal(item.image, `Fresque collective #${number} • Archivée le ${dateStr}`));
+
+        const meta = document.createElement("div");
+        meta.className = "archive-meta";
+        meta.innerHTML = `
+          <div>
+            <span class="archive-title">Fresque #${number}</span>
+            <span>${dateStr}</span>
+          </div>
+        `;
+
+        const dlLink = document.createElement("a");
+        dlLink.className = "btn-secondary";
+        dlLink.href = item.image;
+        dlLink.download = `fresque-collective-${number}.png`;
+        dlLink.textContent = "⬇";
+        dlLink.title = "Télécharger cette archive";
+        dlLink.style.textDecoration = "none";
+
+        meta.appendChild(dlLink);
+        card.appendChild(img);
+        card.appendChild(meta);
+        archivesGrid.appendChild(card);
       });
-      div.addEventListener("contextmenu", (e) => e.preventDefault());
-      swatchesGrid.appendChild(div);
     });
 
-    // Sélection des outils
+    // Modale d'aperçu
+    const archiveModal = document.getElementById("archiveModal");
+    const modalImg = document.getElementById("modalImg");
+    const modalCaption = document.getElementById("modalCaption");
+    const modalDownload = document.getElementById("modalDownload");
+
+    function openModal(src, caption) {
+      modalImg.src = src;
+      modalCaption.textContent = caption;
+      modalDownload.href = src;
+      archiveModal.classList.add("open");
+    }
+
+    document.getElementById("modalClose").addEventListener("click", () => archiveModal.classList.remove("open"));
+    archiveModal.addEventListener("click", (e) => {
+      if (e.target === archiveModal) archiveModal.classList.remove("open");
+    });
+
+    // Navigation entre Toile en cours et Archives
+    const tabStudio = document.getElementById("tabStudio");
+    const tabArchives = document.getElementById("tabArchives");
+    const studioView = document.getElementById("studioView");
+    const archivesView = document.getElementById("archivesView");
+
+    tabStudio.addEventListener("click", () => {
+      tabStudio.classList.add("active");
+      tabArchives.classList.remove("active");
+      studioView.style.display = "flex";
+      archivesView.classList.remove("visible");
+    });
+
+    tabArchives.addEventListener("click", () => {
+      tabArchives.classList.add("active");
+      tabStudio.classList.remove("active");
+      studioView.style.display = "none";
+      archivesView.classList.add("visible");
+    });
+
+    // Création de la palette
+    const paletteRail = document.getElementById("paletteRail");
+    const customColorInput = document.getElementById("customColorInput");
+
+    COLORS.forEach((hex, i) => {
+      const btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "color-swatch" + (i === 0 ? " active" : "");
+      btn.style.backgroundColor = hex;
+      btn.addEventListener("click", () => {
+        document.querySelectorAll(".color-swatch").forEach((s) => s.classList.remove("active"));
+        btn.classList.add("active");
+        currentColor = hex;
+      });
+      paletteRail.insertBefore(btn, paletteRail.lastElementChild);
+    });
+
+    customColorInput.addEventListener("input", (e) => {
+      document.querySelectorAll(".color-swatch").forEach((s) => s.classList.remove("active"));
+      currentColor = e.target.value;
+    });
+
+    // Outils et épaisseurs
     document.querySelectorAll(".tool-btn").forEach((btn) => {
       btn.addEventListener("click", () => {
         document.querySelectorAll(".tool-btn").forEach((b) => b.classList.remove("active"));
         btn.classList.add("active");
         currentTool = btn.dataset.tool;
-        statusText.textContent = "Outil : " + btn.title;
       });
     });
 
-    // Sélection de l'épaisseur
-    document.querySelectorAll(".size-option").forEach((opt) => {
-      opt.addEventListener("click", () => {
-        document.querySelectorAll(".size-option").forEach((o) => o.classList.remove("active"));
-        opt.classList.add("active");
-        brushSize = parseInt(opt.dataset.size, 10);
+    document.querySelectorAll(".size-pill").forEach((pill) => {
+      pill.addEventListener("click", () => {
+        document.querySelectorAll(".size-pill").forEach((p) => p.classList.remove("active"));
+        pill.classList.add("active");
+        brushSize = parseInt(pill.dataset.size, 10);
       });
     });
 
     function getCoords(e) {
       const rect = mainCanvas.getBoundingClientRect();
-      const clientX = e.touches ? e.touches[0].clientX : e.clientX;
-      const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+      const cx = e.touches ? e.touches[0].clientX : e.clientX;
+      const cy = e.touches ? e.touches[0].clientY : e.clientY;
       return {
-        x: Math.floor(clientX - rect.left),
-        y: Math.floor(clientY - rect.top)
+        x: Math.floor((cx - rect.left) * (mainCanvas.width / rect.width)),
+        y: Math.floor((cy - rect.top) * (mainCanvas.height / rect.height))
       };
     }
 
     function hexToRgba(hex) {
-      const clean = hex.replace("#", "");
+      const c = hex.replace("#", "");
       return [
-        parseInt(clean.substring(0, 2), 16),
-        parseInt(clean.substring(2, 4), 16),
-        parseInt(clean.substring(4, 6), 16),
+        parseInt(c.substring(0, 2), 16),
+        parseInt(c.substring(2, 4), 16),
+        parseInt(c.substring(4, 6), 16),
         255
       ];
     }
 
-    function floodFill(startX, startY, fillHex) {
-      if (startX < 0 || startY < 0 || startX >= mainCanvas.width || startY >= mainCanvas.height) return;
+    function floodFill(sx, sy, fillHex) {
+      if (sx < 0 || sy < 0 || sx >= mainCanvas.width || sy >= mainCanvas.height) return;
       const imgData = ctx.getImageData(0, 0, mainCanvas.width, mainCanvas.height);
       const data = imgData.data;
-      const width = mainCanvas.width;
-      const height = mainCanvas.height;
+      const w = mainCanvas.width, h = mainCanvas.height;
+      const idx = (sy * w + sx) * 4;
+      const tr = data[idx], tg = data[idx + 1], tb = data[idx + 2];
+      const [fr, fg, fb] = hexToRgba(fillHex);
+      if (tr === fr && tg === fg && tb === fb) return;
 
-      const idx = (startY * width + startX) * 4;
-      const targetR = data[idx], targetG = data[idx + 1], targetB = data[idx + 2];
-      const [fillR, fillG, fillB] = hexToRgba(fillHex);
-
-      if (targetR === fillR && targetG === fillG && targetB === fillB) return;
-
-      const stack = [[startX, startY]];
+      const stack = [[sx, sy]];
       while (stack.length) {
         const [x, y] = stack.pop();
-        const pos = (y * width + x) * 4;
-        if (data[pos] === targetR && data[pos + 1] === targetG && data[pos + 2] === targetB) {
-          data[pos] = fillR;
-          data[pos + 1] = fillG;
-          data[pos + 2] = fillB;
+        const pos = (y * w + x) * 4;
+        if (data[pos] === tr && data[pos + 1] === tg && data[pos + 2] === tb) {
+          data[pos] = fr;
+          data[pos + 1] = fg;
+          data[pos + 2] = fb;
           data[pos + 3] = 255;
-
           if (x > 0) stack.push([x - 1, y]);
-          if (x < width - 1) stack.push([x + 1, y]);
+          if (x < w - 1) stack.push([x + 1, y]);
           if (y > 0) stack.push([x, y - 1]);
-          if (y < height - 1) stack.push([x, y + 1]);
+          if (y < h - 1) stack.push([x, y + 1]);
         }
       }
       ctx.putImageData(imgData, 0, 0);
     }
 
-    function drawLineSegment(targetCtx, x1, y1, x2, y2, color, width) {
+    function strokeSegment(targetCtx, x1, y1, x2, y2, color, width) {
       targetCtx.strokeStyle = color;
       targetCtx.lineWidth = width;
       targetCtx.lineCap = "round";
@@ -625,81 +987,64 @@
       targetCtx.stroke();
     }
 
-    function startAction(e) {
-      if (e.button === 2 && !e.touches) {
-        activeColor = bgColor;
-      } else {
-        activeColor = fgColor;
-      }
-
+    function startDraw(e) {
       const { x, y } = getCoords(e);
       startX = lastX = x;
       startY = lastY = y;
 
-      if (currentTool === "picker") {
-        const pixel = ctx.getImageData(x, y, 1, 1).data;
-        const picked = "#" + [pixel[0], pixel[1], pixel[2]].map(v => v.toString(16).padStart(2, "0")).join("");
-        if (e.button === 2) {
-          bgColor = picked;
-          bgSwatch.style.backgroundColor = picked;
-        } else {
-          fgColor = picked;
-          fgSwatch.style.backgroundColor = picked;
-        }
-        return;
-      }
-
       pushUndo();
+      registerParticipantOnce();
+      currentStrokeCount++;
 
       if (currentTool === "fill") {
-        floodFill(x, y, activeColor);
-        scheduleSaveToFirebase();
+        floodFill(x, y, currentColor);
+        scheduleSave();
         return;
       }
 
       if (currentTool === "text") {
-        const txt = prompt("Texte à écrire sur la toile :");
-        if (txt) {
-          ctx.fillStyle = activeColor;
-          ctx.font = `${Math.max(14, brushSize * 3)}px "MS Sans Serif", Arial, sans-serif`;
-          ctx.fillText(txt, x, y);
-          scheduleSaveToFirebase();
+        const text = prompt("Votre message à ajouter sur la fresque :");
+        if (text) {
+          ctx.fillStyle = currentColor;
+          ctx.font = `600 ${Math.max(16, brushSize * 2.5)}px -apple-system, sans-serif`;
+          ctx.fillText(text, x, y);
+          scheduleSave();
         }
         return;
       }
 
       isDrawing = true;
 
-      if (currentTool === "pencil" || currentTool === "brush" || currentTool === "eraser") {
-        const col = currentTool === "eraser" ? bgColor : activeColor;
-        const size = currentTool === "pencil" ? 1 : (currentTool === "eraser" ? brushSize * 2.5 : brushSize);
-        drawLineSegment(ctx, x, y, x + 0.1, y + 0.1, col, size);
+      if (currentTool === "brush" || currentTool === "pencil" || currentTool === "eraser") {
+        const col = currentTool === "eraser" ? "#ffffff" : currentColor;
+        const size = currentTool === "pencil" ? 1.5 : (currentTool === "eraser" ? brushSize * 2.4 : brushSize);
+        strokeSegment(ctx, x, y, x + 0.1, y + 0.1, col, size);
       }
     }
 
-    function moveAction(e) {
-      const { x, y } = getCoords(e);
-      coordsText.textContent = `${x}, ${y} px`;
+    function moveDraw(e) {
       if (!isDrawing) return;
+      const { x, y } = getCoords(e);
 
-      if (currentTool === "pencil" || currentTool === "brush" || currentTool === "eraser") {
-        const col = currentTool === "eraser" ? bgColor : activeColor;
-        const size = currentTool === "pencil" ? 1 : (currentTool === "eraser" ? brushSize * 2.5 : brushSize);
-        drawLineSegment(ctx, lastX, lastY, x, y, col, size);
+      if (currentTool === "brush" || currentTool === "pencil" || currentTool === "eraser") {
+        const col = currentTool === "eraser" ? "#ffffff" : currentColor;
+        const size = currentTool === "pencil" ? 1.5 : (currentTool === "eraser" ? brushSize * 2.4 : brushSize);
+        strokeSegment(ctx, lastX, lastY, x, y, col, size);
         lastX = x;
         lastY = y;
       } else if (currentTool === "spray") {
-        ctx.fillStyle = activeColor;
-        const radius = brushSize * 3;
-        for (let i = 0; i < 20; i++) {
+        ctx.fillStyle = currentColor;
+        const radius = brushSize * 2.5;
+        for (let i = 0; i < 24; i++) {
           const angle = Math.random() * Math.PI * 2;
           const r = Math.random() * radius;
-          ctx.fillRect(x + Math.cos(angle) * r, y + Math.sin(angle) * r, 1, 1);
+          ctx.fillRect(x + Math.cos(angle) * r, y + Math.sin(angle) * r, 1.4, 1.4);
         }
       } else if (currentTool === "line" || currentTool === "rect" || currentTool === "ellipse") {
         pCtx.clearRect(0, 0, previewCanvas.width, previewCanvas.height);
-        pCtx.strokeStyle = activeColor;
+        pCtx.strokeStyle = currentColor;
         pCtx.lineWidth = brushSize;
+        pCtx.lineCap = "round";
         pCtx.beginPath();
         if (currentTool === "line") {
           pCtx.moveTo(startX, startY);
@@ -717,7 +1062,7 @@
       }
     }
 
-    function endAction(e) {
+    function endDraw() {
       if (!isDrawing) return;
       isDrawing = false;
 
@@ -726,23 +1071,21 @@
         pCtx.clearRect(0, 0, previewCanvas.width, previewCanvas.height);
       }
 
-      scheduleSaveToFirebase();
+      scheduleSave();
     }
 
-    mainCanvas.addEventListener("mousedown", startAction);
-    window.addEventListener("mousemove", moveAction);
-    window.addEventListener("mouseup", endAction);
-    mainCanvas.addEventListener("contextmenu", (e) => e.preventDefault());
+    mainCanvas.addEventListener("mousedown", startDraw);
+    window.addEventListener("mousemove", moveDraw);
+    window.addEventListener("mouseup", endDraw);
+    mainCanvas.addEventListener("touchstart", (e) => { e.preventDefault(); startDraw(e); }, { passive: false });
+    mainCanvas.addEventListener("touchmove", (e) => { e.preventDefault(); moveDraw(e); }, { passive: false });
+    mainCanvas.addEventListener("touchend", endDraw);
 
-    mainCanvas.addEventListener("touchstart", (e) => { e.preventDefault(); startAction(e); }, { passive: false });
-    mainCanvas.addEventListener("touchmove", (e) => { e.preventDefault(); moveAction(e); }, { passive: false });
-    mainCanvas.addEventListener("touchend", endAction);
-
-    // Boutons de la barre d'actions
+    // Annuler
     document.getElementById("btnUndo").addEventListener("click", () => {
       if (!undoStack.length) return;
       ctx.putImageData(undoStack.pop(), 0, 0);
-      scheduleSaveToFirebase();
+      scheduleSave();
     });
 
     window.addEventListener("keydown", (e) => {
@@ -752,23 +1095,44 @@
       }
     });
 
-    document.getElementById("btnClear").addEventListener("click", () => {
-      if (!confirm("Effacer toute la toile partagée pour tous les visiteurs ?")) return;
-      pushUndo();
-      ctx.fillStyle = "#ffffff";
-      ctx.fillRect(0, 0, mainCanvas.width, mainCanvas.height);
-      scheduleSaveToFirebase(true);
-    });
-
+    // Télécharger PNG
     document.getElementById("btnDownload").addEventListener("click", () => {
       const link = document.createElement("a");
-      link.download = "paintbrush-dessin.png";
+      link.download = "fresque-collective.png";
       link.href = mainCanvas.toDataURL("image/png");
       link.click();
     });
 
-    document.getElementById("btnSyncNow").addEventListener("click", () => {
-      scheduleSaveToFirebase(true);
+    // Nouvelle toile : archive la toile actuelle de façon permanente puis réinitialise
+    document.getElementById("btnNewCanvas").addEventListener("click", async () => {
+      const ok = confirm(
+        "Archiver la fresque actuelle dans l'onglet « Archives » et ouvrir une nouvelle toile vierge pour tous les visiteurs ?"
+      );
+      if (!ok) return;
+
+      try {
+        setSyncState("saving", "Archivage...");
+        const snapshotImage = mainCanvas.toDataURL("image/webp", 0.88);
+
+        // 1. Enregistrement permanent dans les archives (aucune suppression prévue)
+        await push(archivesRef, {
+          image: snapshotImage,
+          archivedAt: Date.now(),
+          strokes: currentStrokeCount
+        });
+
+        // 2. Réinitialisation de la toile en cours
+        undoStack = [];
+        currentStrokeCount = 0;
+        ctx.fillStyle = "#ffffff";
+        ctx.fillRect(0, 0, mainCanvas.width, mainCanvas.height);
+
+        await scheduleSave(true);
+        statusHint.textContent = "✅ La fresque précédente a été enregistrée dans les Archives !";
+      } catch (err) {
+        console.error(err);
+        alert("Impossible d'archiver pour le moment. Vérifiez votre connexion ou les règles Firebase.");
+      }
     });
   </script>
 </body>
