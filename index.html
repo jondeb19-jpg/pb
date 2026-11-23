@@ -21,10 +21,10 @@
       --danger: #d63847;
       --danger-hover: #b52b38;
       --border: #2c313c;
-      --shadow: 0 10px 28px rgba(0, 0, 0, 0.35);
-      --radius-sm: 8px;
-      --radius-md: 12px;
-      --radius-lg: 16px;
+      --shadow: 0 8px 22px rgba(0, 0, 0, 0.35);
+      --radius-sm: 7px;
+      --radius-md: 11px;
+      --radius-lg: 14px;
     }
 
     * {
@@ -33,18 +33,25 @@
       -webkit-user-select: none;
     }
 
-    body {
+    html, body {
       margin: 0;
-      min-height: 100vh;
+      padding: 0;
+      height: 100dvh;
+      max-height: 100dvh;
+      overflow: hidden;
       background-color: var(--bg-app);
       background-image: radial-gradient(var(--bg-grid) 1px, transparent 1px);
       background-size: 18px 18px;
       color: var(--ink);
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    body {
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding: 10px 12px;
+      padding: 6px 8px;
+      gap: 6px;
     }
 
     .header {
@@ -53,59 +60,64 @@
       background: var(--surface);
       border: 1px solid var(--border);
       border-radius: var(--radius-md);
-      padding: 8px 14px;
+      padding: 6px 10px;
       display: flex;
       flex-wrap: wrap;
       align-items: center;
       justify-content: space-between;
-      gap: 10px;
-      margin-bottom: 10px;
+      gap: 6px;
+      flex-shrink: 0;
     }
 
     .brand {
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 8px;
+      min-width: 0;
     }
 
     .brand-logo {
-      width: 32px;
-      height: 32px;
-      border-radius: 9px;
+      width: 28px;
+      height: 28px;
+      border-radius: 8px;
       background: var(--accent);
       color: #fff;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 16px;
+      font-size: 14px;
       flex-shrink: 0;
     }
 
     .brand-title {
       margin: 0;
-      font-size: 15px;
+      font-size: 14px;
       font-weight: 700;
       letter-spacing: -0.01em;
+      white-space: nowrap;
     }
 
     .brand-sub {
-      margin: 1px 0 0;
-      font-size: 11.5px;
+      margin: 0;
+      font-size: 11px;
       color: var(--ink-muted);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
     .header-right {
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 6px;
       flex-wrap: wrap;
     }
 
     .tabs {
       display: inline-flex;
       background: var(--surface-2);
-      padding: 3px;
-      border-radius: 9px;
+      padding: 2px;
+      border-radius: 8px;
       border: 1px solid var(--border);
     }
 
@@ -113,14 +125,14 @@
       border: none;
       background: transparent;
       color: var(--ink-muted);
-      font-size: 12px;
+      font-size: 11.5px;
       font-weight: 600;
-      padding: 5px 11px;
-      border-radius: 7px;
+      padding: 4px 9px;
+      border-radius: 6px;
       cursor: pointer;
       display: inline-flex;
       align-items: center;
-      gap: 5px;
+      gap: 4px;
       transition: all 0.15s ease;
     }
 
@@ -132,26 +144,26 @@
     .archive-badge {
       background: var(--bg-app);
       color: var(--ink);
-      font-size: 10.5px;
-      padding: 1px 6px;
+      font-size: 10px;
+      padding: 1px 5px;
       border-radius: 999px;
     }
 
     .live-pill {
       display: inline-flex;
       align-items: center;
-      gap: 6px;
-      font-size: 11.5px;
+      gap: 5px;
+      font-size: 11px;
       color: var(--ink-muted);
       background: var(--surface-2);
       border: 1px solid var(--border);
-      padding: 5px 10px;
+      padding: 4px 8px;
       border-radius: 999px;
     }
 
     .live-dot {
-      width: 7px;
-      height: 7px;
+      width: 6px;
+      height: 6px;
       border-radius: 50%;
       background: #6c727f;
     }
@@ -163,14 +175,14 @@
       border: 1px solid var(--border);
       background: var(--surface-2);
       color: var(--ink-muted);
-      font-size: 11.5px;
+      font-size: 11px;
       font-weight: 600;
-      padding: 5px 10px;
+      padding: 4px 8px;
       border-radius: 999px;
       cursor: pointer;
       display: inline-flex;
       align-items: center;
-      gap: 5px;
+      gap: 4px;
     }
 
     .admin-pill:hover {
@@ -189,34 +201,36 @@
       max-width: 1120px;
       display: flex;
       flex-direction: column;
-      gap: 8px;
+      gap: 6px;
       flex: 1;
+      min-height: 0;
     }
 
     .control-bar {
       background: var(--surface);
       border: 1px solid var(--border);
       border-radius: var(--radius-md);
-      padding: 6px 10px;
+      padding: 5px 8px;
       display: flex;
       flex-wrap: wrap;
       align-items: center;
       justify-content: space-between;
-      gap: 8px;
+      gap: 5px;
+      flex-shrink: 0;
     }
 
     .group {
       display: flex;
       align-items: center;
-      gap: 4px;
+      gap: 3px;
       flex-wrap: wrap;
     }
 
     .sep {
       width: 1px;
-      height: 20px;
+      height: 18px;
       background: var(--border);
-      margin: 0 4px;
+      margin: 0 2px;
     }
 
     .tool-btn {
@@ -224,13 +238,13 @@
       background: transparent;
       color: var(--ink-muted);
       border-radius: var(--radius-sm);
-      padding: 5px 8px;
-      font-size: 12px;
+      padding: 4px 6px;
+      font-size: 11.5px;
       font-weight: 500;
       cursor: pointer;
       display: inline-flex;
       align-items: center;
-      gap: 4px;
+      gap: 3px;
       transition: all 0.12s ease;
     }
 
@@ -246,9 +260,9 @@
     }
 
     .size-btn {
-      width: 24px;
-      height: 24px;
-      border-radius: 7px;
+      width: 22px;
+      height: 22px;
+      border-radius: 6px;
       border: 1px solid transparent;
       background: transparent;
       display: inline-flex;
@@ -273,8 +287,8 @@
       color: var(--ink);
       border: 1px solid var(--border);
       border-radius: var(--radius-sm);
-      padding: 5px 9px;
-      font-size: 12px;
+      padding: 4px 8px;
+      font-size: 11.5px;
       font-weight: 500;
       cursor: pointer;
       display: inline-flex;
@@ -284,26 +298,24 @@
 
     .btn-ghost:hover { background: var(--surface-hover); }
 
-    /* Bouton Annuler mis en valeur */
     .btn-undo {
       background: var(--undo-bg);
       color: #dbeafe;
       border: 1.5px solid var(--undo-border);
       border-radius: var(--radius-sm);
-      padding: 6px 12px;
-      font-size: 12.5px;
+      padding: 4px 9px;
+      font-size: 11.5px;
       font-weight: 700;
       cursor: pointer;
       display: inline-flex;
       align-items: center;
-      gap: 6px;
-      box-shadow: 0 2px 8px rgba(59, 130, 246, 0.25);
+      gap: 4px;
+      box-shadow: 0 2px 6px rgba(59, 130, 246, 0.25);
       transition: all 0.15s ease;
     }
 
     .btn-undo:hover:not(:disabled) {
       background: var(--undo-hover);
-      transform: translateY(-1px);
     }
 
     .btn-undo:disabled {
@@ -318,8 +330,8 @@
     .undo-count {
       background: rgba(59, 130, 246, 0.25);
       color: #93c5fd;
-      font-size: 10.5px;
-      padding: 1px 6px;
+      font-size: 10px;
+      padding: 0 5px;
       border-radius: 999px;
     }
 
@@ -332,8 +344,8 @@
       color: #ff7582;
       border: 1px solid rgba(214, 56, 71, 0.45);
       border-radius: var(--radius-sm);
-      padding: 5px 8px;
-      font-size: 11.5px;
+      padding: 4px 7px;
+      font-size: 11px;
       font-weight: 600;
       cursor: pointer;
       display: inline-flex;
@@ -351,13 +363,13 @@
       color: #fff;
       border: none;
       border-radius: var(--radius-sm);
-      padding: 6px 11px;
-      font-size: 12px;
+      padding: 5px 10px;
+      font-size: 11.5px;
       font-weight: 600;
       cursor: pointer;
       display: inline-flex;
       align-items: center;
-      gap: 5px;
+      gap: 4px;
       transition: background 0.15s ease;
     }
 
@@ -368,13 +380,13 @@
     .palette-strip {
       display: flex;
       align-items: center;
-      gap: 5px;
+      gap: 4px;
       flex-wrap: wrap;
     }
 
     .swatch {
-      width: 20px;
-      height: 20px;
+      width: 18px;
+      height: 18px;
       border-radius: 50%;
       border: 1.5px solid rgba(255, 255, 255, 0.16);
       cursor: pointer;
@@ -382,16 +394,16 @@
       padding: 0;
     }
 
-    .swatch:hover { transform: scale(1.15); }
+    .swatch:hover { transform: scale(1.12); }
     .swatch.active {
-      transform: scale(1.15);
-      box-shadow: 0 0 0 2px var(--surface), 0 0 0 3.5px var(--ink);
+      transform: scale(1.12);
+      box-shadow: 0 0 0 2px var(--surface), 0 0 0 3px var(--ink);
     }
 
     .custom-color {
       position: relative;
-      width: 20px;
-      height: 20px;
+      width: 18px;
+      height: 18px;
       border-radius: 50%;
       border: 1px dashed var(--ink-muted);
       display: inline-flex;
@@ -415,24 +427,43 @@
       border: 1px solid var(--border);
       border-radius: var(--radius-lg);
       box-shadow: var(--shadow);
-      padding: 10px;
-      overflow: auto;
+      padding: 6px;
+      flex: 1;
+      min-height: 0;
       display: flex;
       flex-direction: column;
       align-items: center;
+      justify-content: center;
+      gap: 4px;
+      overflow: hidden;
+    }
+
+    .canvas-viewport {
+      width: 100%;
+      height: 100%;
+      min-height: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
     .canvas-wrap {
       position: relative;
+      width: 100%;
+      height: 100%;
+      max-width: 100%;
+      max-height: 100%;
+      aspect-ratio: 840 / 520;
       border-radius: 6px;
       overflow: hidden;
       background: #ffffff;
-      line-height: 0;
-      box-shadow: 0 4px 18px rgba(0, 0, 0, 0.4);
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
     }
 
     canvas {
       display: block;
+      width: 100%;
+      height: 100%;
       cursor: crosshair;
       touch-action: none;
     }
@@ -445,10 +476,14 @@
     }
 
     .canvas-caption {
-      margin-top: 7px;
-      font-size: 11.5px;
+      font-size: 10.5px;
       color: var(--ink-muted);
       text-align: center;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 100%;
+      flex-shrink: 0;
     }
 
     .archives-view {
@@ -456,7 +491,8 @@
       background: var(--surface);
       border: 1px solid var(--border);
       border-radius: var(--radius-lg);
-      padding: 18px;
+      padding: 14px;
+      overflow-y: auto;
     }
 
     .archives-view.visible { display: block; }
@@ -466,18 +502,18 @@
       flex-wrap: wrap;
       align-items: center;
       justify-content: space-between;
-      gap: 10px;
-      margin-bottom: 16px;
+      gap: 8px;
+      margin-bottom: 12px;
     }
 
     .archives-head h2 {
-      margin: 0 0 4px;
-      font-size: 16px;
+      margin: 0 0 3px;
+      font-size: 15px;
     }
 
     .archives-head p {
       margin: 0;
-      font-size: 12.5px;
+      font-size: 12px;
       color: var(--ink-muted);
     }
 
@@ -486,8 +522,8 @@
       background: rgba(56, 176, 0, 0.1);
       border: 1px solid rgba(56, 176, 0, 0.35);
       color: #9ef0b0;
-      font-size: 12px;
-      padding: 6px 12px;
+      font-size: 11.5px;
+      padding: 5px 10px;
       border-radius: var(--radius-sm);
     }
 
@@ -499,8 +535,8 @@
 
     .archives-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-      gap: 14px;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 12px;
     }
 
     .archive-card {
@@ -522,12 +558,12 @@
     }
 
     .archive-foot {
-      padding: 9px 11px;
+      padding: 8px 10px;
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 8px;
-      font-size: 11.5px;
+      font-size: 11px;
       color: var(--ink-muted);
     }
 
@@ -540,7 +576,7 @@
     .archive-actions {
       display: flex;
       align-items: center;
-      gap: 6px;
+      gap: 5px;
     }
 
     .modal {
@@ -551,7 +587,7 @@
       z-index: 100;
       align-items: center;
       justify-content: center;
-      padding: 16px;
+      padding: 14px;
     }
 
     .modal.open { display: flex; }
@@ -560,12 +596,12 @@
       background: var(--surface);
       border: 1px solid var(--border);
       border-radius: var(--radius-lg);
-      padding: 16px;
+      padding: 14px;
       max-width: 900px;
       width: 100%;
       display: flex;
       flex-direction: column;
-      gap: 12px;
+      gap: 10px;
     }
 
     .login-card {
@@ -574,11 +610,11 @@
 
     .login-card h3 {
       margin: 0 0 4px;
-      font-size: 16px;
+      font-size: 15px;
     }
 
     .login-card p {
-      margin: 0 0 12px;
+      margin: 0 0 10px;
       font-size: 12px;
       color: var(--ink-muted);
     }
@@ -586,12 +622,12 @@
     .field {
       display: flex;
       flex-direction: column;
-      gap: 5px;
-      margin-bottom: 10px;
+      gap: 4px;
+      margin-bottom: 8px;
     }
 
     .field label {
-      font-size: 12px;
+      font-size: 11.5px;
       color: var(--ink-muted);
     }
 
@@ -599,7 +635,7 @@
       background: var(--surface-2);
       border: 1px solid var(--border);
       border-radius: var(--radius-sm);
-      padding: 8px 10px;
+      padding: 7px 9px;
       color: var(--ink);
       font-size: 13px;
       outline: none;
@@ -611,9 +647,9 @@
 
     .form-error {
       color: #ff7582;
-      font-size: 12px;
-      min-height: 16px;
-      margin-bottom: 6px;
+      font-size: 11.5px;
+      min-height: 15px;
+      margin-bottom: 4px;
     }
 
     .modal-card img {
@@ -628,34 +664,38 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      gap: 10px;
-      font-size: 12.5px;
+      gap: 8px;
+      font-size: 12px;
       color: var(--ink-muted);
     }
 
     .footer-stats {
       width: 100%;
       max-width: 1120px;
-      margin-top: 8px;
       padding: 2px 6px;
       display: flex;
       justify-content: space-between;
       align-items: center;
       font-size: 10.5px;
-      color: #6f7685;
-      opacity: 0.72;
+      color: #8b92a0;
+      flex-shrink: 0;
     }
 
     .stats-pair {
       display: flex;
-      gap: 10px;
+      gap: 8px;
     }
 
     @media (max-width: 680px) {
+      .brand-sub { display: none; }
       .sep { display: none; }
       .tool-btn span.label { display: none; }
-      .tool-btn { padding: 6px 7px; font-size: 14px; }
-      .btn-undo { padding: 6px 10px; font-size: 12px; }
+      .tool-btn { padding: 4px 5px; font-size: 13px; }
+      .size-btn { width: 20px; height: 20px; }
+      .swatch, .custom-color { width: 16px; height: 16px; }
+      .btn-undo { padding: 4px 7px; font-size: 11px; }
+      .btn-ghost { padding: 4px 6px; font-size: 11px; }
+      .btn-archive-new { padding: 4px 8px; font-size: 11px; }
     }
   </style>
 </head>
@@ -666,7 +706,7 @@
       <div class="brand-logo">🎨</div>
       <div>
         <h1 class="brand-title">Fresque Collective</h1>
-        <p class="brand-sub">Toile partagée en direct — chacun peut ajouter sa touche pour tous les visiteurs</p>
+        <p class="brand-sub">Toile partagée en direct — chacun peut ajouter sa touche</p>
       </div>
     </div>
 
@@ -707,9 +747,9 @@
 
       <div class="group" title="Épaisseur">
         <button class="size-btn active" data-size="3"><span class="size-dot" style="width:4px;height:4px"></span></button>
-        <button class="size-btn" data-size="7"><span class="size-dot" style="width:8px;height:8px"></span></button>
-        <button class="size-btn" data-size="14"><span class="size-dot" style="width:12px;height:12px"></span></button>
-        <button class="size-btn" data-size="24"><span class="size-dot" style="width:17px;height:17px"></span></button>
+        <button class="size-btn" data-size="7"><span class="size-dot" style="width:7px;height:7px"></span></button>
+        <button class="size-btn" data-size="14"><span class="size-dot" style="width:11px;height:11px"></span></button>
+        <button class="size-btn" data-size="24"><span class="size-dot" style="width:15px;height:15px"></span></button>
       </div>
 
       <div class="sep"></div>
@@ -729,18 +769,20 @@
         </button>
         <button class="btn-ghost" id="btnDownload" title="Télécharger PNG">⬇ PNG</button>
         <button class="btn-archive-new" id="btnNewCanvas" title="Enregistre la toile actuelle dans les Archives et ouvre une toile vierge">
-          ✨ Nouvelle toile
+          ✨ Enregistrer &amp; nouvelle toile
         </button>
       </div>
     </div>
 
     <section class="canvas-shell">
-      <div class="canvas-wrap">
-        <canvas id="mainCanvas" width="840" height="520"></canvas>
-        <canvas id="previewCanvas" width="840" height="520"></canvas>
+      <div class="canvas-viewport" id="canvasViewport">
+        <div class="canvas-wrap" id="canvasWrap">
+          <canvas id="mainCanvas" width="840" height="520"></canvas>
+          <canvas id="previewCanvas" width="840" height="520"></canvas>
+        </div>
       </div>
       <div class="canvas-caption" id="statusCaption">
-        Dessin collectif en temps réel • Utilisez « ↩ Annuler » pour revenir en arrière ou « ✨ Nouvelle toile » pour archiver.
+        En direct • « Enregistrer &amp; nouvelle toile » archive cette fresque et repart à zéro.
       </div>
     </section>
   </main>
@@ -833,6 +875,30 @@
     const clientId = "user_" + Math.random().toString(36).slice(2, 10);
     let isAdmin = false;
     let latestArchivesSnapshot = null;
+
+    // Ajustement précis des dimensions de la toile à l'espace disponible
+    const canvasViewport = document.getElementById("canvasViewport");
+    const canvasWrap = document.getElementById("canvasWrap");
+    const RATIO = 840 / 520;
+
+    function fitCanvasToViewport() {
+      if (!canvasViewport || !canvasWrap) return;
+      const vw = canvasViewport.clientWidth;
+      const vh = canvasViewport.clientHeight;
+      if (!vw || !vh) return;
+      let w = vw;
+      let h = w / RATIO;
+      if (h > vh) {
+        h = vh;
+        w = h * RATIO;
+      }
+      canvasWrap.style.width = `${Math.floor(w)}px`;
+      canvasWrap.style.height = `${Math.floor(h)}px`;
+    }
+
+    window.addEventListener("resize", fitCanvasToViewport);
+    window.addEventListener("orientationchange", () => setTimeout(fitCanvasToViewport, 120));
+    requestAnimationFrame(fitCanvasToViewport);
 
     // Gestion Authentification Admin
     const btnAdminAuth = document.getElementById("btnAdminAuth");
@@ -1097,6 +1163,7 @@
       tabArchives.classList.remove("active");
       studioView.style.display = "flex";
       archivesView.classList.remove("visible");
+      requestAnimationFrame(fitCanvasToViewport);
     });
 
     tabArchives.addEventListener("click", () => {
