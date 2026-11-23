@@ -3,22 +3,28 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <title>Atelier Collectif — Fresque Partagée en Direct</title>
+  <title>Fresque Collective — Atelier Sombre</title>
   <style>
     :root {
-      --bg-desk: #f3efe6;
-      --bg-desk-dot: #dfd8c8;
-      --surface: #fffdf9;
-      --surface-muted: #f7f3ea;
-      --ink: #1e1d1a;
-      --ink-soft: #6b665c;
-      --accent: #d95d39;
-      --accent-hover: #bf4b29;
-      --border: #e2dacb;
-      --shadow-sm: 0 2px 8px rgba(30, 29, 26, 0.06);
-      --shadow-md: 0 10px 30px rgba(30, 29, 26, 0.10);
+      --bg-app: #111317;
+      --bg-grid: rgba(255, 255, 255, 0.035);
+      --surface: #191c22;
+      --surface-2: #22262f;
+      --surface-hover: #2a2f3a;
+      --ink: #f1f3f5;
+      --ink-muted: #9aa1ad;
+      --accent: #e06c4b;
+      --accent-hover: #c95838;
+      --undo-bg: #25334a;
+      --undo-border: #3b82f6;
+      --undo-hover: #2f4363;
+      --danger: #d63847;
+      --danger-hover: #b52b38;
+      --border: #2c313c;
+      --shadow: 0 10px 28px rgba(0, 0, 0, 0.35);
+      --radius-sm: 8px;
       --radius-md: 12px;
-      --radius-lg: 18px;
+      --radius-lg: 16px;
     }
 
     * {
@@ -30,108 +36,103 @@
     body {
       margin: 0;
       min-height: 100vh;
-      background-color: var(--bg-desk);
-      background-image: radial-gradient(var(--bg-desk-dot) 1.2px, transparent 1.2px);
-      background-size: 20px 20px;
+      background-color: var(--bg-app);
+      background-image: radial-gradient(var(--bg-grid) 1px, transparent 1px);
+      background-size: 18px 18px;
       color: var(--ink);
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding: 14px;
+      padding: 10px 12px;
     }
 
-    /* En-tête éditorial */
     .header {
       width: 100%;
       max-width: 1120px;
       background: var(--surface);
       border: 1px solid var(--border);
-      border-radius: var(--radius-lg);
-      box-shadow: var(--shadow-sm);
-      padding: 12px 18px;
+      border-radius: var(--radius-md);
+      padding: 8px 14px;
       display: flex;
       flex-wrap: wrap;
       align-items: center;
       justify-content: space-between;
-      gap: 12px;
-      margin-bottom: 14px;
+      gap: 10px;
+      margin-bottom: 10px;
     }
 
     .brand {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 10px;
     }
 
-    .brand-badge {
-      width: 40px;
-      height: 40px;
-      border-radius: 12px;
+    .brand-logo {
+      width: 32px;
+      height: 32px;
+      border-radius: 9px;
       background: var(--accent);
       color: #fff;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 20px;
-      box-shadow: 0 4px 12px rgba(217, 93, 57, 0.28);
+      font-size: 16px;
       flex-shrink: 0;
     }
 
-    .brand-text h1 {
+    .brand-title {
       margin: 0;
-      font-size: 17px;
+      font-size: 15px;
       font-weight: 700;
-      letter-spacing: -0.02em;
+      letter-spacing: -0.01em;
     }
 
-    .brand-text p {
-      margin: 2px 0 0;
-      font-size: 12.5px;
-      color: var(--ink-soft);
+    .brand-sub {
+      margin: 1px 0 0;
+      font-size: 11.5px;
+      color: var(--ink-muted);
     }
 
-    .header-actions {
+    .header-right {
       display: flex;
       align-items: center;
       gap: 8px;
       flex-wrap: wrap;
     }
 
-    /* Onglets Atelier / Archives */
     .tabs {
       display: inline-flex;
-      background: var(--surface-muted);
-      padding: 4px;
-      border-radius: 999px;
+      background: var(--surface-2);
+      padding: 3px;
+      border-radius: 9px;
       border: 1px solid var(--border);
     }
 
     .tab-btn {
       border: none;
       background: transparent;
-      color: var(--ink-soft);
-      font-size: 13px;
+      color: var(--ink-muted);
+      font-size: 12px;
       font-weight: 600;
-      padding: 6px 14px;
-      border-radius: 999px;
+      padding: 5px 11px;
+      border-radius: 7px;
       cursor: pointer;
-      transition: all 0.18s ease;
-      display: flex;
+      display: inline-flex;
       align-items: center;
-      gap: 6px;
+      gap: 5px;
+      transition: all 0.15s ease;
     }
 
     .tab-btn.active {
-      background: var(--surface);
+      background: var(--surface-hover);
       color: var(--ink);
-      box-shadow: var(--shadow-sm);
     }
 
     .archive-badge {
-      background: var(--border);
+      background: var(--bg-app);
       color: var(--ink);
-      font-size: 11px;
+      font-size: 10.5px;
       padding: 1px 6px;
       border-radius: 999px;
     }
@@ -140,65 +141,80 @@
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      font-size: 12px;
-      color: var(--ink-soft);
-      background: var(--surface-muted);
+      font-size: 11.5px;
+      color: var(--ink-muted);
+      background: var(--surface-2);
       border: 1px solid var(--border);
-      padding: 6px 12px;
+      padding: 5px 10px;
       border-radius: 999px;
     }
 
     .live-dot {
-      width: 8px;
-      height: 8px;
+      width: 7px;
+      height: 7px;
       border-radius: 50%;
-      background: #9e988c;
+      background: #6c727f;
     }
-    .live-dot.online {
-      background: #2b9348;
-      box-shadow: 0 0 0 3px rgba(43, 147, 72, 0.18);
-    }
-    .live-dot.saving {
-      background: #e09f3e;
-    }
-    .live-dot.error {
-      background: #d62828;
+    .live-dot.online { background: #38b000; box-shadow: 0 0 6px rgba(56, 176, 0, 0.5); }
+    .live-dot.saving { background: #f4a261; }
+    .live-dot.error  { background: #e63946; }
+
+    .admin-pill {
+      border: 1px solid var(--border);
+      background: var(--surface-2);
+      color: var(--ink-muted);
+      font-size: 11.5px;
+      font-weight: 600;
+      padding: 5px 10px;
+      border-radius: 999px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
     }
 
-    /* Conteneur principal */
+    .admin-pill:hover {
+      background: var(--surface-hover);
+      color: var(--ink);
+    }
+
+    .admin-pill.is-admin {
+      border-color: #38b000;
+      color: #80ed99;
+      background: rgba(56, 176, 0, 0.12);
+    }
+
     .main-stage {
       width: 100%;
       max-width: 1120px;
       display: flex;
       flex-direction: column;
-      gap: 12px;
+      gap: 8px;
       flex: 1;
     }
 
-    /* Barre d'outils flottante */
-    .toolbar {
+    .control-bar {
       background: var(--surface);
       border: 1px solid var(--border);
       border-radius: var(--radius-md);
-      box-shadow: var(--shadow-sm);
-      padding: 8px 12px;
+      padding: 6px 10px;
       display: flex;
       flex-wrap: wrap;
       align-items: center;
       justify-content: space-between;
-      gap: 10px;
+      gap: 8px;
     }
 
-    .tool-group {
+    .group {
       display: flex;
       align-items: center;
-      gap: 5px;
+      gap: 4px;
       flex-wrap: wrap;
     }
 
-    .divider {
+    .sep {
       width: 1px;
-      height: 24px;
+      height: 20px;
       background: var(--border);
       margin: 0 4px;
     }
@@ -206,84 +222,45 @@
     .tool-btn {
       border: 1px solid transparent;
       background: transparent;
-      color: var(--ink);
-      border-radius: 9px;
-      padding: 6px 10px;
-      font-size: 13px;
+      color: var(--ink-muted);
+      border-radius: var(--radius-sm);
+      padding: 5px 8px;
+      font-size: 12px;
       font-weight: 500;
       cursor: pointer;
       display: inline-flex;
       align-items: center;
-      gap: 5px;
-      transition: all 0.15s ease;
+      gap: 4px;
+      transition: all 0.12s ease;
     }
 
     .tool-btn:hover {
-      background: var(--surface-muted);
+      background: var(--surface-2);
+      color: var(--ink);
     }
 
     .tool-btn.active {
-      background: var(--ink);
-      color: #fff;
-    }
-
-    .btn-primary {
-      background: var(--accent);
-      color: #fff;
-      border: none;
-      border-radius: 9px;
-      padding: 7px 13px;
-      font-size: 13px;
-      font-weight: 600;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      transition: background 0.15s ease;
-    }
-
-    .btn-primary:hover {
-      background: var(--accent-hover);
-    }
-
-    .btn-secondary {
-      background: var(--surface-muted);
+      background: var(--surface-hover);
       color: var(--ink);
-      border: 1px solid var(--border);
-      border-radius: 9px;
-      padding: 6px 11px;
-      font-size: 12.5px;
-      font-weight: 500;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
+      border-color: #464d5c;
     }
 
-    .btn-secondary:hover {
-      background: #ece5d5;
-    }
-
-    /* Épaisseurs */
-    .size-pill {
-      width: 28px;
-      height: 28px;
-      border-radius: 8px;
+    .size-btn {
+      width: 24px;
+      height: 24px;
+      border-radius: 7px;
       border: 1px solid transparent;
       background: transparent;
-      display: flex;
+      display: inline-flex;
       align-items: center;
       justify-content: center;
       cursor: pointer;
     }
 
-    .size-pill:hover {
-      background: var(--surface-muted);
-    }
-
-    .size-pill.active {
+    .size-btn:hover { background: var(--surface-2); }
+    .size-btn.active {
+      background: var(--surface-hover);
       border-color: var(--ink);
-      background: var(--surface-muted);
     }
 
     .size-dot {
@@ -291,88 +268,167 @@
       background: var(--ink);
     }
 
-    /* Espace Toile + Palette */
-    .studio-layout {
-      display: flex;
-      gap: 14px;
-      align-items: flex-start;
-      justify-content: center;
-    }
-
-    .palette-rail {
-      background: var(--surface);
+    .btn-ghost {
+      background: var(--surface-2);
+      color: var(--ink);
       border: 1px solid var(--border);
-      border-radius: var(--radius-md);
-      box-shadow: var(--shadow-sm);
-      padding: 10px 8px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 8px;
-      flex-shrink: 0;
-    }
-
-    .color-swatch {
-      width: 26px;
-      height: 26px;
-      border-radius: 50%;
-      border: 2px solid rgba(0, 0, 0, 0.12);
+      border-radius: var(--radius-sm);
+      padding: 5px 9px;
+      font-size: 12px;
+      font-weight: 500;
       cursor: pointer;
-      transition: transform 0.12s ease, box-shadow 0.12s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
     }
 
-    .color-swatch:hover {
-      transform: scale(1.12);
+    .btn-ghost:hover { background: var(--surface-hover); }
+
+    /* Bouton Annuler mis en valeur */
+    .btn-undo {
+      background: var(--undo-bg);
+      color: #dbeafe;
+      border: 1.5px solid var(--undo-border);
+      border-radius: var(--radius-sm);
+      padding: 6px 12px;
+      font-size: 12.5px;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      box-shadow: 0 2px 8px rgba(59, 130, 246, 0.25);
+      transition: all 0.15s ease;
     }
 
-    .color-swatch.active {
-      transform: scale(1.15);
-      box-shadow: 0 0 0 2px var(--surface), 0 0 0 4px var(--ink);
+    .btn-undo:hover:not(:disabled) {
+      background: var(--undo-hover);
+      transform: translateY(-1px);
     }
 
-    .color-picker-wrap {
-      position: relative;
-      width: 26px;
-      height: 26px;
-      border-radius: 50%;
-      overflow: hidden;
-      border: 2px dashed var(--ink-soft);
+    .btn-undo:disabled {
+      opacity: 0.42;
+      cursor: not-allowed;
+      box-shadow: none;
+      border-color: var(--border);
+      background: var(--surface-2);
+      color: var(--ink-muted);
+    }
+
+    .undo-count {
+      background: rgba(59, 130, 246, 0.25);
+      color: #93c5fd;
+      font-size: 10.5px;
+      padding: 1px 6px;
+      border-radius: 999px;
+    }
+
+    .btn-undo:disabled .undo-count {
+      display: none;
+    }
+
+    .btn-danger {
+      background: rgba(214, 56, 71, 0.16);
+      color: #ff7582;
+      border: 1px solid rgba(214, 56, 71, 0.45);
+      border-radius: var(--radius-sm);
+      padding: 5px 8px;
+      font-size: 11.5px;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .btn-danger:hover {
+      background: var(--danger);
+      color: #fff;
+    }
+
+    .btn-archive-new {
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      border-radius: var(--radius-sm);
+      padding: 6px 11px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      transition: background 0.15s ease;
+    }
+
+    .btn-archive-new:hover {
+      background: var(--accent-hover);
+    }
+
+    .palette-strip {
       display: flex;
+      align-items: center;
+      gap: 5px;
+      flex-wrap: wrap;
+    }
+
+    .swatch {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      border: 1.5px solid rgba(255, 255, 255, 0.16);
+      cursor: pointer;
+      transition: transform 0.12s ease;
+      padding: 0;
+    }
+
+    .swatch:hover { transform: scale(1.15); }
+    .swatch.active {
+      transform: scale(1.15);
+      box-shadow: 0 0 0 2px var(--surface), 0 0 0 3.5px var(--ink);
+    }
+
+    .custom-color {
+      position: relative;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      border: 1px dashed var(--ink-muted);
+      display: inline-flex;
       align-items: center;
       justify-content: center;
-      font-size: 13px;
+      font-size: 11px;
+      color: var(--ink-muted);
       cursor: pointer;
+      overflow: hidden;
     }
 
-    .color-picker-wrap input[type="color"] {
+    .custom-color input {
       position: absolute;
       inset: -6px;
-      width: 40px;
-      height: 40px;
       opacity: 0;
       cursor: pointer;
     }
 
-    .canvas-board {
-      flex: 1;
+    .canvas-shell {
       background: var(--surface);
       border: 1px solid var(--border);
       border-radius: var(--radius-lg);
-      box-shadow: var(--shadow-md);
-      padding: 12px;
+      box-shadow: var(--shadow);
+      padding: 10px;
       overflow: auto;
       display: flex;
       flex-direction: column;
       align-items: center;
     }
 
-    .canvas-frame {
+    .canvas-wrap {
       position: relative;
-      border-radius: 8px;
+      border-radius: 6px;
       overflow: hidden;
-      box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.08);
       background: #ffffff;
       line-height: 0;
+      box-shadow: 0 4px 18px rgba(0, 0, 0, 0.4);
     }
 
     canvas {
@@ -388,60 +444,72 @@
       pointer-events: none;
     }
 
-    .canvas-hint {
-      margin-top: 8px;
-      font-size: 12px;
-      color: var(--ink-soft);
+    .canvas-caption {
+      margin-top: 7px;
+      font-size: 11.5px;
+      color: var(--ink-muted);
       text-align: center;
     }
 
-    /* Vue Archives */
     .archives-view {
       display: none;
       background: var(--surface);
       border: 1px solid var(--border);
       border-radius: var(--radius-lg);
-      box-shadow: var(--shadow-sm);
-      padding: 20px;
+      padding: 18px;
     }
 
-    .archives-view.visible {
-      display: block;
+    .archives-view.visible { display: block; }
+
+    .archives-head {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 16px;
     }
 
-    .archives-header {
-      margin-bottom: 18px;
-    }
-
-    .archives-header h2 {
+    .archives-head h2 {
       margin: 0 0 4px;
-      font-size: 18px;
+      font-size: 16px;
     }
 
-    .archives-header p {
+    .archives-head p {
       margin: 0;
-      font-size: 13px;
-      color: var(--ink-soft);
+      font-size: 12.5px;
+      color: var(--ink-muted);
+    }
+
+    .admin-banner {
+      display: none;
+      background: rgba(56, 176, 0, 0.1);
+      border: 1px solid rgba(56, 176, 0, 0.35);
+      color: #9ef0b0;
+      font-size: 12px;
+      padding: 6px 12px;
+      border-radius: var(--radius-sm);
+    }
+
+    .admin-banner.active {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
     }
 
     .archives-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-      gap: 16px;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 14px;
     }
 
     .archive-card {
-      background: var(--surface-muted);
+      background: var(--surface-2);
       border: 1px solid var(--border);
       border-radius: var(--radius-md);
       overflow: hidden;
       display: flex;
       flex-direction: column;
-      transition: transform 0.15s ease;
-    }
-
-    .archive-card:hover {
-      transform: translateY(-2px);
     }
 
     .archive-thumb {
@@ -453,212 +521,285 @@
       cursor: zoom-in;
     }
 
-    .archive-meta {
-      padding: 10px 12px;
+    .archive-foot {
+      padding: 9px 11px;
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 8px;
-      font-size: 12px;
-      color: var(--ink-soft);
+      font-size: 11.5px;
+      color: var(--ink-muted);
     }
 
-    .archive-title {
+    .archive-name {
       font-weight: 600;
       color: var(--ink);
       display: block;
-      margin-bottom: 2px;
     }
 
-    /* Modale d'aperçu plein écran pour les archives */
-    .modal-backdrop {
+    .archive-actions {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .modal {
       display: none;
       position: fixed;
       inset: 0;
-      background: rgba(20, 19, 17, 0.75);
+      background: rgba(0, 0, 0, 0.78);
       z-index: 100;
       align-items: center;
       justify-content: center;
-      padding: 20px;
+      padding: 16px;
     }
 
-    .modal-backdrop.open {
-      display: flex;
-    }
+    .modal.open { display: flex; }
 
-    .modal-box {
+    .modal-card {
       background: var(--surface);
+      border: 1px solid var(--border);
       border-radius: var(--radius-lg);
       padding: 16px;
-      max-width: 920px;
+      max-width: 900px;
       width: 100%;
-      box-shadow: var(--shadow-md);
       display: flex;
       flex-direction: column;
       gap: 12px;
     }
 
-    .modal-box img {
+    .login-card {
+      max-width: 380px;
+    }
+
+    .login-card h3 {
+      margin: 0 0 4px;
+      font-size: 16px;
+    }
+
+    .login-card p {
+      margin: 0 0 12px;
+      font-size: 12px;
+      color: var(--ink-muted);
+    }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      margin-bottom: 10px;
+    }
+
+    .field label {
+      font-size: 12px;
+      color: var(--ink-muted);
+    }
+
+    .field input {
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 8px 10px;
+      color: var(--ink);
+      font-size: 13px;
+      outline: none;
+    }
+
+    .field input:focus {
+      border-color: var(--accent);
+    }
+
+    .form-error {
+      color: #ff7582;
+      font-size: 12px;
+      min-height: 16px;
+      margin-bottom: 6px;
+    }
+
+    .modal-card img {
       width: 100%;
       max-height: 75vh;
       object-fit: contain;
       background: #fff;
-      border-radius: 8px;
-      border: 1px solid var(--border);
+      border-radius: 6px;
     }
 
-    .modal-footer {
+    .modal-bar {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      font-size: 13px;
-      color: var(--ink-soft);
+      gap: 10px;
+      font-size: 12.5px;
+      color: var(--ink-muted);
     }
 
-    /* Pied de page discret avec compteurs */
-    .footer-subtle {
+    .footer-stats {
       width: 100%;
       max-width: 1120px;
-      margin-top: 14px;
-      padding: 4px 8px;
+      margin-top: 8px;
+      padding: 2px 6px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      font-size: 11px;
-      color: #968f82;
-      opacity: 0.78;
+      font-size: 10.5px;
+      color: #6f7685;
+      opacity: 0.72;
     }
 
-    .subtle-stats {
+    .stats-pair {
       display: flex;
-      gap: 12px;
+      gap: 10px;
     }
 
-    @media (max-width: 768px) {
-      body { padding: 8px; }
-      .studio-layout { flex-direction: column; align-items: stretch; }
-      .palette-rail {
-        flex-direction: row;
-        flex-wrap: wrap;
-        justify-content: center;
-      }
-      .divider { display: none; }
+    @media (max-width: 680px) {
+      .sep { display: none; }
+      .tool-btn span.label { display: none; }
+      .tool-btn { padding: 6px 7px; font-size: 14px; }
+      .btn-undo { padding: 6px 10px; font-size: 12px; }
     }
   </style>
 </head>
 <body>
 
-  <!-- En-tête -->
   <header class="header">
     <div class="brand">
-      <div class="brand-badge">🖌️</div>
-      <div class="brand-text">
-        <h1>Fresque Collective</h1>
-        <p>Dessinez librement : chaque trait est enregistré et partagé avec tous les visiteurs.</p>
+      <div class="brand-logo">🎨</div>
+      <div>
+        <h1 class="brand-title">Fresque Collective</h1>
+        <p class="brand-sub">Toile partagée en direct — chacun peut ajouter sa touche pour tous les visiteurs</p>
       </div>
     </div>
 
-    <div class="header-actions">
+    <div class="header-right">
       <div class="tabs">
-        <button class="tab-btn active" id="tabStudio">🎨 Toile en cours</button>
+        <button class="tab-btn active" id="tabStudio">🖌️ Atelier</button>
         <button class="tab-btn" id="tabArchives">
           🏛️ Archives <span class="archive-badge" id="archiveCount">0</span>
         </button>
       </div>
 
-      <div class="live-pill" title="État de synchronisation avec la toile partagée">
+      <button class="admin-pill" id="btnAdminAuth" title="Connexion administrateur pour gérer les archives">
+        🔐 Admin
+      </button>
+
+      <div class="live-pill">
         <span class="live-dot" id="syncDot"></span>
         <span id="syncText">Connexion...</span>
       </div>
     </div>
   </header>
 
-  <!-- Vue Atelier -->
   <main class="main-stage" id="studioView">
-    <div class="toolbar">
-      <div class="tool-group">
-        <button class="tool-btn active" data-tool="brush" title="Pinceau fluide">🖌️ Pinceau</button>
-        <button class="tool-btn" data-tool="pencil" title="Crayon fin">✏️ Crayon</button>
-        <button class="tool-btn" data-tool="spray" title="Aérosol">💨 Spray</button>
-        <button class="tool-btn" data-tool="fill" title="Remplir une zone">🪣 Remplir</button>
-        <button class="tool-btn" data-tool="line" title="Ligne droite">╱ Ligne</button>
-        <button class="tool-btn" data-tool="rect" title="Rectangle">▭ Carré</button>
-        <button class="tool-btn" data-tool="ellipse" title="Cercle / Ellipse">◯ Cercle</button>
-        <button class="tool-btn" data-tool="text" title="Ajouter du texte">T Texte</button>
-        <button class="tool-btn" data-tool="eraser" title="Gomme blanche">🧽 Gomme</button>
+    <div class="control-bar">
+      <div class="group">
+        <button class="tool-btn active" data-tool="brush" title="Pinceau">🖌️<span class="label">Pinceau</span></button>
+        <button class="tool-btn" data-tool="pencil" title="Crayon">✏️<span class="label">Crayon</span></button>
+        <button class="tool-btn" data-tool="spray" title="Spray">💨<span class="label">Spray</span></button>
+        <button class="tool-btn" data-tool="fill" title="Remplir">🪣<span class="label">Remplir</span></button>
+        <button class="tool-btn" data-tool="line" title="Ligne">╱<span class="label">Ligne</span></button>
+        <button class="tool-btn" data-tool="rect" title="Rectangle">▭<span class="label">Carré</span></button>
+        <button class="tool-btn" data-tool="ellipse" title="Cercle">◯<span class="label">Cercle</span></button>
+        <button class="tool-btn" data-tool="text" title="Texte">T<span class="label">Texte</span></button>
+        <button class="tool-btn" data-tool="eraser" title="Gomme">🧽<span class="label">Gomme</span></button>
       </div>
 
-      <div class="divider"></div>
+      <div class="sep"></div>
 
-      <div class="tool-group" title="Épaisseur du trait">
-        <button class="size-pill active" data-size="3"><span class="size-dot" style="width:4px;height:4px"></span></button>
-        <button class="size-pill" data-size="7"><span class="size-dot" style="width:8px;height:8px"></span></button>
-        <button class="size-pill" data-size="14"><span class="size-dot" style="width:13px;height:13px"></span></button>
-        <button class="size-pill" data-size="24"><span class="size-dot" style="width:18px;height:18px"></span></button>
+      <div class="group" title="Épaisseur">
+        <button class="size-btn active" data-size="3"><span class="size-dot" style="width:4px;height:4px"></span></button>
+        <button class="size-btn" data-size="7"><span class="size-dot" style="width:8px;height:8px"></span></button>
+        <button class="size-btn" data-size="14"><span class="size-dot" style="width:12px;height:12px"></span></button>
+        <button class="size-btn" data-size="24"><span class="size-dot" style="width:17px;height:17px"></span></button>
       </div>
 
-      <div class="divider"></div>
+      <div class="sep"></div>
 
-      <div class="tool-group">
-        <button class="btn-secondary" id="btnUndo" title="Annuler mon dernier trait (Ctrl+Z)">↩ Annuler</button>
-        <button class="btn-secondary" id="btnDownload" title="Télécharger cette œuvre en PNG">⬇ PNG</button>
-        <button class="btn-primary" id="btnNewCanvas" title="Archive la toile actuelle dans la galerie et démarre une toile vierge">
+      <div class="palette-strip" id="paletteStrip">
+        <label class="custom-color" title="Couleur libre">
+          +
+          <input type="color" id="customColor" value="#e06c4b" />
+        </label>
+      </div>
+
+      <div class="sep"></div>
+
+      <div class="group">
+        <button class="btn-undo" id="btnUndo" title="Annuler le dernier coup (Ctrl+Z)" disabled>
+          ↩ Annuler <span class="undo-count" id="undoCount">0</span>
+        </button>
+        <button class="btn-ghost" id="btnDownload" title="Télécharger PNG">⬇ PNG</button>
+        <button class="btn-archive-new" id="btnNewCanvas" title="Enregistre la toile actuelle dans les Archives et ouvre une toile vierge">
           ✨ Nouvelle toile
         </button>
       </div>
     </div>
 
-    <div class="studio-layout">
-      <!-- Palette de couleurs -->
-      <aside class="palette-rail" id="paletteRail" title="Choisir une couleur">
-        <label class="color-picker-wrap" title="Couleur personnalisée">
-          +
-          <input type="color" id="customColorInput" value="#d95d39" />
-        </label>
-      </aside>
-
-      <!-- Toile centrale -->
-      <section class="canvas-board">
-        <div class="canvas-frame">
-          <canvas id="mainCanvas" width="820" height="520"></canvas>
-          <canvas id="previewCanvas" width="820" height="520"></canvas>
-        </div>
-        <div class="canvas-hint" id="statusHint">
-          Astuce : créez une « Nouvelle toile » pour archiver ce dessin collectif dans les Archives et repartir d'une page blanche.
-        </div>
-      </section>
-    </div>
+    <section class="canvas-shell">
+      <div class="canvas-wrap">
+        <canvas id="mainCanvas" width="840" height="520"></canvas>
+        <canvas id="previewCanvas" width="840" height="520"></canvas>
+      </div>
+      <div class="canvas-caption" id="statusCaption">
+        Dessin collectif en temps réel • Utilisez « ↩ Annuler » pour revenir en arrière ou « ✨ Nouvelle toile » pour archiver.
+      </div>
+    </section>
   </main>
 
-  <!-- Vue Archives (lecture seule, aucune suppression possible) -->
   <section class="main-stage archives-view" id="archivesView">
-    <div class="archives-header">
-      <h2>🏛️ Archives des fresques collectives</h2>
-      <p>Toutes les toiles terminées sont conservées ici de façon permanente. Cliquez sur une œuvre pour l'agrandir.</p>
+    <div class="archives-head">
+      <div>
+        <h2>🏛️ Archives des fresques collectives</h2>
+        <p>Chaque nouvelle toile enregistrée est conservée ici. Cliquez sur une image pour l'agrandir.</p>
+      </div>
+      <div class="admin-banner" id="adminArchivesBanner">
+        🛡️ Mode Admin actif : vous pouvez supprimer des archives
+      </div>
     </div>
     <div class="archives-grid" id="archivesGrid">
-      <p style="color: var(--ink-soft); font-size: 13px;">Chargement des archives...</p>
+      <p style="color: var(--ink-muted); font-size: 12.5px;">Chargement des archives...</p>
     </div>
   </section>
 
-  <!-- Modale Aperçu Archive -->
-  <div class="modal-backdrop" id="archiveModal">
-    <div class="modal-box">
-      <img id="modalImg" src="" alt="Archive fresque collective" />
-      <div class="modal-footer">
+  <!-- Modale Connexion Admin -->
+  <div class="modal" id="loginModal">
+    <div class="modal-card login-card">
+      <h3>🔐 Connexion Administrateur</h3>
+      <p>Connectez-vous avec votre compte Firebase Admin pour supprimer des archives.</p>
+      <form id="loginForm">
+        <div class="field">
+          <label for="adminEmail">Adresse e-mail</label>
+          <input type="email" id="adminEmail" required autocomplete="username" />
+        </div>
+        <div class="field">
+          <label for="adminPassword">Mot de passe</label>
+          <input type="password" id="adminPassword" required autocomplete="current-password" />
+        </div>
+        <div class="form-error" id="loginError"></div>
+        <div style="display:flex; justify-content:flex-end; gap:8px;">
+          <button type="button" class="btn-ghost" id="cancelLogin">Annuler</button>
+          <button type="submit" class="btn-archive-new">Se connecter</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modale Zoom Archive -->
+  <div class="modal" id="archiveModal">
+    <div class="modal-card">
+      <img id="modalImg" src="" alt="Aperçu archive" />
+      <div class="modal-bar">
         <span id="modalCaption"></span>
         <div style="display:flex; gap:8px;">
-          <a id="modalDownload" class="btn-secondary" download="archive-fresque.png" style="text-decoration:none;">⬇ Télécharger</a>
-          <button class="btn-primary" id="modalClose">Fermer</button>
+          <a id="modalDownload" class="btn-ghost" download="fresque-archive.png" style="text-decoration:none;">⬇ Télécharger</a>
+          <button class="btn-archive-new" id="modalClose">Fermer</button>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- Pied de page discret avec compteurs -->
-  <footer class="footer-subtle">
-    <span>Toile partagée en temps réel</span>
-    <div class="subtle-stats">
+  <footer class="footer-stats">
+    <span>Fresque ouverte à tous</span>
+    <div class="stats-pair">
       <span id="visitsCounter">Visites : —</span>
       <span>•</span>
       <span id="participantsCounter">Participants : —</span>
@@ -667,7 +808,8 @@
 
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";
-    import { getDatabase, ref, set, push, onValue, runTransaction } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-database.js";
+    import { getDatabase, ref, set, push, remove, onValue, runTransaction } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-database.js";
+    import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-auth.js";
 
     const firebaseConfig = {
       apiKey: "AIzaSyDIaO-l7a9hh7gFFs66VxtKq3jBs2gDr8c",
@@ -681,25 +823,81 @@
 
     const app = initializeApp(firebaseConfig);
     const db = getDatabase(app);
+    const auth = getAuth(app);
 
     const currentCanvasRef = ref(db, "shared_canvas/current");
     const archivesRef = ref(db, "shared_canvas/archives");
     const visitsRef = ref(db, "shared_canvas/stats/visits");
     const participantsRef = ref(db, "shared_canvas/stats/participants");
 
-    const clientId = "artist_" + Math.random().toString(36).slice(2, 10);
+    const clientId = "user_" + Math.random().toString(36).slice(2, 10);
+    let isAdmin = false;
+    let latestArchivesSnapshot = null;
 
-    // Compteur de visites (1 incrément par ouverture de session)
+    // Gestion Authentification Admin
+    const btnAdminAuth = document.getElementById("btnAdminAuth");
+    const loginModal = document.getElementById("loginModal");
+    const loginForm = document.getElementById("loginForm");
+    const loginError = document.getElementById("loginError");
+    const adminArchivesBanner = document.getElementById("adminArchivesBanner");
+
+    onAuthStateChanged(auth, (user) => {
+      isAdmin = Boolean(user);
+      if (isAdmin) {
+        btnAdminAuth.textContent = "🛡️ Admin (Déconnexion)";
+        btnAdminAuth.classList.add("is-admin");
+        adminArchivesBanner.classList.add("active");
+      } else {
+        btnAdminAuth.textContent = "🔐 Admin";
+        btnAdminAuth.classList.remove("is-admin");
+        adminArchivesBanner.classList.remove("active");
+      }
+      renderArchives(latestArchivesSnapshot);
+    });
+
+    btnAdminAuth.addEventListener("click", async () => {
+      if (isAdmin) {
+        await signOut(auth);
+      } else {
+        loginError.textContent = "";
+        loginModal.classList.add("open");
+        document.getElementById("adminEmail").focus();
+      }
+    });
+
+    document.getElementById("cancelLogin").addEventListener("click", () => {
+      loginModal.classList.remove("open");
+    });
+
+    loginModal.addEventListener("click", (e) => {
+      if (e.target === loginModal) loginModal.classList.remove("open");
+    });
+
+    loginForm.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      loginError.textContent = "";
+      const email = document.getElementById("adminEmail").value.trim();
+      const password = document.getElementById("adminPassword").value;
+      try {
+        await signInWithEmailAndPassword(auth, email, password);
+        loginModal.classList.remove("open");
+        loginForm.reset();
+      } catch (err) {
+        console.error(err);
+        loginError.textContent = "Identifiants invalides ou compte non activé.";
+      }
+    });
+
+    // Compteurs visites & participants
     if (!sessionStorage.getItem("fresque_visited")) {
       sessionStorage.setItem("fresque_visited", "1");
-      runTransaction(visitsRef, (current) => (current || 0) + 1).catch(() => {});
+      runTransaction(visitsRef, (v) => (v || 0) + 1).catch(() => {});
     }
 
-    // Compteur de participants (incrémenté dès que le visiteur trace son premier coup de pinceau)
-    function registerParticipantOnce() {
+    function registerParticipant() {
       if (localStorage.getItem("fresque_participated")) return;
       localStorage.setItem("fresque_participated", "1");
-      runTransaction(participantsRef, (current) => (current || 0) + 1).catch(() => {});
+      runTransaction(participantsRef, (p) => (p || 0) + 1).catch(() => {});
     }
 
     onValue(visitsRef, (snap) => {
@@ -710,11 +908,10 @@
       document.getElementById("participantsCounter").textContent = `Participants : ${snap.val() ?? 0}`;
     });
 
-    // Palette harmonieuse (couleurs artistiques + essentiels)
     const COLORS = [
-      "#1e1d1a", "#6b665c", "#ffffff", "#d95d39", "#e63946",
-      "#f4a261", "#e9c46a", "#2a9d8f", "#2b9348", "#3a86ff",
-      "#1d3557", "#8338ec", "#ff006e", "#8d5b4c"
+      "#111317", "#ffffff", "#e06c4b", "#e63946", "#f4a261",
+      "#e9c46a", "#2a9d8f", "#38b000", "#3a86ff", "#8338ec",
+      "#ff006e", "#8d5b4c"
     ];
 
     const mainCanvas = document.getElementById("mainCanvas");
@@ -724,61 +921,67 @@
 
     const syncDot = document.getElementById("syncDot");
     const syncText = document.getElementById("syncText");
-    const statusHint = document.getElementById("statusHint");
+    const statusCaption = document.getElementById("statusCaption");
+    const btnUndo = document.getElementById("btnUndo");
+    const undoCount = document.getElementById("undoCount");
 
     let currentTool = "brush";
     let brushSize = 3;
-    let currentColor = "#1e1d1a";
+    let currentColor = "#111317";
     let isDrawing = false;
     let startX = 0, startY = 0, lastX = 0, lastY = 0;
     let undoStack = [];
-    let lastSentTimestamp = 0;
-    let saveTimeout = null;
-    let currentStrokeCount = 0;
+    let lastSentAt = 0;
+    let saveTimer = null;
+    let strokeCount = 0;
 
-    // Fond blanc initial
     ctx.fillStyle = "#ffffff";
     ctx.fillRect(0, 0, mainCanvas.width, mainCanvas.height);
 
-    function setSyncState(state, text) {
+    function setSync(state, label) {
       syncDot.className = "live-dot " + state;
-      syncText.textContent = text;
+      syncText.textContent = label;
+    }
+
+    function updateUndoUI() {
+      btnUndo.disabled = undoStack.length === 0;
+      undoCount.textContent = undoStack.length;
     }
 
     function pushUndo() {
-      if (undoStack.length >= 15) undoStack.shift();
+      if (undoStack.length >= 20) undoStack.shift();
       undoStack.push(ctx.getImageData(0, 0, mainCanvas.width, mainCanvas.height));
+      updateUndoUI();
     }
 
     function scheduleSave(immediate = false) {
-      clearTimeout(saveTimeout);
-      setSyncState("saving", "Sauvegarde...");
-      saveTimeout = setTimeout(async () => {
+      clearTimeout(saveTimer);
+      setSync("saving", "Envoi...");
+      saveTimer = setTimeout(async () => {
         try {
           const dataUrl = mainCanvas.toDataURL("image/webp", 0.85);
           const now = Date.now();
-          lastSentTimestamp = now;
+          lastSentAt = now;
           await set(currentCanvasRef, {
             image: dataUrl,
             updatedBy: clientId,
             updatedAt: now,
-            strokes: currentStrokeCount
+            strokes: strokeCount
           });
-          setSyncState("online", "En direct");
+          setSync("online", "En direct");
         } catch (err) {
           console.error(err);
-          setSyncState("error", "Erreur réseau");
+          setSync("error", "Erreur");
         }
       }, immediate ? 40 : 350);
     }
 
-    // Écoute de la toile partagée en direct
-    onValue(currentCanvasRef, (snapshot) => {
-      const data = snapshot.val();
-      setSyncState("online", "En direct");
+    onValue(currentCanvasRef, (snap) => {
+      const data = snap.val();
+      setSync("online", "En direct");
       if (!data || !data.image) return;
-      currentStrokeCount = data.strokes || 0;
-      if (data.updatedBy === clientId && data.updatedAt === lastSentTimestamp) return;
+      strokeCount = data.strokes || 0;
+      if (data.updatedBy === clientId && data.updatedAt === lastSentAt) return;
       if (isDrawing) return;
 
       const img = new Image();
@@ -787,72 +990,89 @@
         ctx.drawImage(img, 0, 0);
       };
       img.src = data.image;
-    }, () => {
-      setSyncState("error", "Accès bloqué");
-    });
+    }, () => setSync("error", "Accès refusé"));
 
-    // Chargement et affichage des Archives (lecture seule)
+    // Archives + gestion admin
     const archivesGrid = document.getElementById("archivesGrid");
     const archiveCount = document.getElementById("archiveCount");
 
-    onValue(archivesRef, (snapshot) => {
-      const val = snapshot.val();
+    function renderArchives(val) {
       if (!val) {
         archiveCount.textContent = "0";
-        archivesGrid.innerHTML = `<p style="color: var(--ink-soft); font-size: 13px;">Aucune œuvre archivée pour le moment. Cliquez sur « ✨ Nouvelle toile » dans l'atelier pour archiver le dessin actuel !</p>`;
+        archivesGrid.innerHTML = `<p style="color: var(--ink-muted); font-size: 12.5px;">Aucune fresque archivée pour l'instant.</p>`;
         return;
       }
 
-      const items = Object.entries(val)
+      const list = Object.entries(val)
         .map(([id, item]) => ({ id, ...item }))
         .sort((a, b) => (b.archivedAt || 0) - (a.archivedAt || 0));
 
-      archiveCount.textContent = items.length;
+      archiveCount.textContent = list.length;
       archivesGrid.innerHTML = "";
 
-      items.forEach((item, index) => {
-        const number = items.length - index;
+      list.forEach((item, idx) => {
+        const num = list.length - idx;
         const dateStr = item.archivedAt
           ? new Date(item.archivedAt).toLocaleDateString("fr-FR", {
               day: "2-digit", month: "short", year: "numeric", hour: "2-digit", minute: "2-digit"
             })
-          : "Date inconnue";
+          : "";
 
-        const card = document.createElement("article");
+        const card = document.createElement("div");
         card.className = "archive-card";
 
         const img = document.createElement("img");
         img.className = "archive-thumb";
         img.src = item.image;
-        img.alt = `Fresque #${number}`;
-        img.addEventListener("click", () => openModal(item.image, `Fresque collective #${number} • Archivée le ${dateStr}`));
+        img.alt = `Fresque #${num}`;
+        img.addEventListener("click", () => openModal(item.image, `Fresque #${num} • ${dateStr}`));
 
-        const meta = document.createElement("div");
-        meta.className = "archive-meta";
-        meta.innerHTML = `
-          <div>
-            <span class="archive-title">Fresque #${number}</span>
-            <span>${dateStr}</span>
-          </div>
-        `;
+        const foot = document.createElement("div");
+        foot.className = "archive-foot";
+        foot.innerHTML = `<div><span class="archive-name">Fresque #${num}</span><span>${dateStr}</span></div>`;
 
-        const dlLink = document.createElement("a");
-        dlLink.className = "btn-secondary";
-        dlLink.href = item.image;
-        dlLink.download = `fresque-collective-${number}.png`;
-        dlLink.textContent = "⬇";
-        dlLink.title = "Télécharger cette archive";
-        dlLink.style.textDecoration = "none";
+        const actions = document.createElement("div");
+        actions.className = "archive-actions";
 
-        meta.appendChild(dlLink);
+        const dl = document.createElement("a");
+        dl.className = "btn-ghost";
+        dl.href = item.image;
+        dl.download = `fresque-${num}.png`;
+        dl.textContent = "⬇";
+        dl.style.textDecoration = "none";
+        actions.appendChild(dl);
+
+        if (isAdmin) {
+          const delBtn = document.createElement("button");
+          delBtn.type = "button";
+          delBtn.className = "btn-danger";
+          delBtn.textContent = "🗑";
+          delBtn.title = "Supprimer cette archive (Admin)";
+          delBtn.addEventListener("click", async () => {
+            if (!confirm(`Supprimer définitivement la « Fresque #${num} » des archives ?`)) return;
+            try {
+              await remove(ref(db, `shared_canvas/archives/${item.id}`));
+            } catch (err) {
+              console.error(err);
+              alert("Suppression refusée : vérifiez votre UID dans les règles Firebase.");
+            }
+          });
+          actions.appendChild(delBtn);
+        }
+
+        foot.appendChild(actions);
         card.appendChild(img);
-        card.appendChild(meta);
+        card.appendChild(foot);
         archivesGrid.appendChild(card);
       });
+    }
+
+    onValue(archivesRef, (snapshot) => {
+      latestArchivesSnapshot = snapshot.val();
+      renderArchives(latestArchivesSnapshot);
     });
 
-    // Modale d'aperçu
-    const archiveModal = document.getElementById("archiveModal");
+    const modal = document.getElementById("archiveModal");
     const modalImg = document.getElementById("modalImg");
     const modalCaption = document.getElementById("modalCaption");
     const modalDownload = document.getElementById("modalDownload");
@@ -861,15 +1081,12 @@
       modalImg.src = src;
       modalCaption.textContent = caption;
       modalDownload.href = src;
-      archiveModal.classList.add("open");
+      modal.classList.add("open");
     }
 
-    document.getElementById("modalClose").addEventListener("click", () => archiveModal.classList.remove("open"));
-    archiveModal.addEventListener("click", (e) => {
-      if (e.target === archiveModal) archiveModal.classList.remove("open");
-    });
+    document.getElementById("modalClose").addEventListener("click", () => modal.classList.remove("open"));
+    modal.addEventListener("click", (e) => { if (e.target === modal) modal.classList.remove("open"); });
 
-    // Navigation entre Toile en cours et Archives
     const tabStudio = document.getElementById("tabStudio");
     const tabArchives = document.getElementById("tabArchives");
     const studioView = document.getElementById("studioView");
@@ -889,42 +1106,40 @@
       archivesView.classList.add("visible");
     });
 
-    // Création de la palette
-    const paletteRail = document.getElementById("paletteRail");
-    const customColorInput = document.getElementById("customColorInput");
+    const paletteStrip = document.getElementById("paletteStrip");
+    const customColor = document.getElementById("customColor");
 
     COLORS.forEach((hex, i) => {
       const btn = document.createElement("button");
       btn.type = "button";
-      btn.className = "color-swatch" + (i === 0 ? " active" : "");
+      btn.className = "swatch" + (i === 0 ? " active" : "");
       btn.style.backgroundColor = hex;
       btn.addEventListener("click", () => {
-        document.querySelectorAll(".color-swatch").forEach((s) => s.classList.remove("active"));
+        document.querySelectorAll(".swatch").forEach((s) => s.classList.remove("active"));
         btn.classList.add("active");
         currentColor = hex;
       });
-      paletteRail.insertBefore(btn, paletteRail.lastElementChild);
+      paletteStrip.insertBefore(btn, paletteStrip.lastElementChild);
     });
 
-    customColorInput.addEventListener("input", (e) => {
-      document.querySelectorAll(".color-swatch").forEach((s) => s.classList.remove("active"));
+    customColor.addEventListener("input", (e) => {
+      document.querySelectorAll(".swatch").forEach((s) => s.classList.remove("active"));
       currentColor = e.target.value;
     });
 
-    // Outils et épaisseurs
-    document.querySelectorAll(".tool-btn").forEach((btn) => {
-      btn.addEventListener("click", () => {
-        document.querySelectorAll(".tool-btn").forEach((b) => b.classList.remove("active"));
-        btn.classList.add("active");
-        currentTool = btn.dataset.tool;
+    document.querySelectorAll(".tool-btn").forEach((b) => {
+      b.addEventListener("click", () => {
+        document.querySelectorAll(".tool-btn").forEach((x) => x.classList.remove("active"));
+        b.classList.add("active");
+        currentTool = b.dataset.tool;
       });
     });
 
-    document.querySelectorAll(".size-pill").forEach((pill) => {
-      pill.addEventListener("click", () => {
-        document.querySelectorAll(".size-pill").forEach((p) => p.classList.remove("active"));
-        pill.classList.add("active");
-        brushSize = parseInt(pill.dataset.size, 10);
+    document.querySelectorAll(".size-btn").forEach((b) => {
+      b.addEventListener("click", () => {
+        document.querySelectorAll(".size-btn").forEach((x) => x.classList.remove("active"));
+        b.classList.add("active");
+        brushSize = parseInt(b.dataset.size, 10);
       });
     });
 
@@ -976,15 +1191,15 @@
       ctx.putImageData(imgData, 0, 0);
     }
 
-    function strokeSegment(targetCtx, x1, y1, x2, y2, color, width) {
-      targetCtx.strokeStyle = color;
-      targetCtx.lineWidth = width;
-      targetCtx.lineCap = "round";
-      targetCtx.lineJoin = "round";
-      targetCtx.beginPath();
-      targetCtx.moveTo(x1, y1);
-      targetCtx.lineTo(x2, y2);
-      targetCtx.stroke();
+    function strokeSeg(tCtx, x1, y1, x2, y2, col, w) {
+      tCtx.strokeStyle = col;
+      tCtx.lineWidth = w;
+      tCtx.lineCap = "round";
+      tCtx.lineJoin = "round";
+      tCtx.beginPath();
+      tCtx.moveTo(x1, y1);
+      tCtx.lineTo(x2, y2);
+      tCtx.stroke();
     }
 
     function startDraw(e) {
@@ -993,8 +1208,8 @@
       startY = lastY = y;
 
       pushUndo();
-      registerParticipantOnce();
-      currentStrokeCount++;
+      registerParticipant();
+      strokeCount++;
 
       if (currentTool === "fill") {
         floodFill(x, y, currentColor);
@@ -1003,22 +1218,24 @@
       }
 
       if (currentTool === "text") {
-        const text = prompt("Votre message à ajouter sur la fresque :");
-        if (text) {
+        const txt = prompt("Texte à ajouter :");
+        if (txt) {
           ctx.fillStyle = currentColor;
-          ctx.font = `600 ${Math.max(16, brushSize * 2.5)}px -apple-system, sans-serif`;
-          ctx.fillText(text, x, y);
+          ctx.font = `600 ${Math.max(16, brushSize * 2.4)}px -apple-system, sans-serif`;
+          ctx.fillText(txt, x, y);
           scheduleSave();
+        } else {
+          undoStack.pop();
+          updateUndoUI();
         }
         return;
       }
 
       isDrawing = true;
-
       if (currentTool === "brush" || currentTool === "pencil" || currentTool === "eraser") {
         const col = currentTool === "eraser" ? "#ffffff" : currentColor;
-        const size = currentTool === "pencil" ? 1.5 : (currentTool === "eraser" ? brushSize * 2.4 : brushSize);
-        strokeSegment(ctx, x, y, x + 0.1, y + 0.1, col, size);
+        const sz = currentTool === "pencil" ? 1.5 : (currentTool === "eraser" ? brushSize * 2.4 : brushSize);
+        strokeSeg(ctx, x, y, x + 0.1, y + 0.1, col, sz);
       }
     }
 
@@ -1028,17 +1245,17 @@
 
       if (currentTool === "brush" || currentTool === "pencil" || currentTool === "eraser") {
         const col = currentTool === "eraser" ? "#ffffff" : currentColor;
-        const size = currentTool === "pencil" ? 1.5 : (currentTool === "eraser" ? brushSize * 2.4 : brushSize);
-        strokeSegment(ctx, lastX, lastY, x, y, col, size);
+        const sz = currentTool === "pencil" ? 1.5 : (currentTool === "eraser" ? brushSize * 2.4 : brushSize);
+        strokeSeg(ctx, lastX, lastY, x, y, col, sz);
         lastX = x;
         lastY = y;
       } else if (currentTool === "spray") {
         ctx.fillStyle = currentColor;
-        const radius = brushSize * 2.5;
-        for (let i = 0; i < 24; i++) {
-          const angle = Math.random() * Math.PI * 2;
-          const r = Math.random() * radius;
-          ctx.fillRect(x + Math.cos(angle) * r, y + Math.sin(angle) * r, 1.4, 1.4);
+        const rMax = brushSize * 2.5;
+        for (let i = 0; i < 22; i++) {
+          const a = Math.random() * Math.PI * 2;
+          const r = Math.random() * rMax;
+          ctx.fillRect(x + Math.cos(a) * r, y + Math.sin(a) * r, 1.4, 1.4);
         }
       } else if (currentTool === "line" || currentTool === "rect" || currentTool === "ellipse") {
         pCtx.clearRect(0, 0, previewCanvas.width, previewCanvas.height);
@@ -1065,12 +1282,10 @@
     function endDraw() {
       if (!isDrawing) return;
       isDrawing = false;
-
       if (currentTool === "line" || currentTool === "rect" || currentTool === "ellipse") {
         ctx.drawImage(previewCanvas, 0, 0);
         pCtx.clearRect(0, 0, previewCanvas.width, previewCanvas.height);
       }
-
       scheduleSave();
     }
 
@@ -1081,57 +1296,52 @@
     mainCanvas.addEventListener("touchmove", (e) => { e.preventDefault(); moveDraw(e); }, { passive: false });
     mainCanvas.addEventListener("touchend", endDraw);
 
-    // Annuler
-    document.getElementById("btnUndo").addEventListener("click", () => {
+    btnUndo.addEventListener("click", () => {
       if (!undoStack.length) return;
       ctx.putImageData(undoStack.pop(), 0, 0);
+      updateUndoUI();
       scheduleSave();
     });
 
     window.addEventListener("keydown", (e) => {
       if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === "z") {
         e.preventDefault();
-        document.getElementById("btnUndo").click();
+        btnUndo.click();
       }
     });
 
-    // Télécharger PNG
     document.getElementById("btnDownload").addEventListener("click", () => {
-      const link = document.createElement("a");
-      link.download = "fresque-collective.png";
-      link.href = mainCanvas.toDataURL("image/png");
-      link.click();
+      const a = document.createElement("a");
+      a.download = "fresque-collective.png";
+      a.href = mainCanvas.toDataURL("image/png");
+      a.click();
     });
 
-    // Nouvelle toile : archive la toile actuelle de façon permanente puis réinitialise
     document.getElementById("btnNewCanvas").addEventListener("click", async () => {
       const ok = confirm(
-        "Archiver la fresque actuelle dans l'onglet « Archives » et ouvrir une nouvelle toile vierge pour tous les visiteurs ?"
+        "Enregistrer et archiver la toile actuelle dans l'onglet Archives, puis démarrer une nouvelle toile vierge ?"
       );
       if (!ok) return;
 
       try {
-        setSyncState("saving", "Archivage...");
-        const snapshotImage = mainCanvas.toDataURL("image/webp", 0.88);
-
-        // 1. Enregistrement permanent dans les archives (aucune suppression prévue)
+        setSync("saving", "Archivage...");
+        const snapImg = mainCanvas.toDataURL("image/webp", 0.88);
         await push(archivesRef, {
-          image: snapshotImage,
+          image: snapImg,
           archivedAt: Date.now(),
-          strokes: currentStrokeCount
+          strokes: strokeCount
         });
 
-        // 2. Réinitialisation de la toile en cours
         undoStack = [];
-        currentStrokeCount = 0;
+        updateUndoUI();
+        strokeCount = 0;
         ctx.fillStyle = "#ffffff";
         ctx.fillRect(0, 0, mainCanvas.width, mainCanvas.height);
-
         await scheduleSave(true);
-        statusHint.textContent = "✅ La fresque précédente a été enregistrée dans les Archives !";
+        statusCaption.textContent = "✅ Fresque enregistrée dans les Archives ! Nouvelle toile prête.";
       } catch (err) {
         console.error(err);
-        alert("Impossible d'archiver pour le moment. Vérifiez votre connexion ou les règles Firebase.");
+        alert("Erreur lors de l'archivage.");
       }
     });
   </script>
